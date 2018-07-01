@@ -40,7 +40,8 @@ class AuthController extends Controller
             $user_data = $this->guard()->user();
             $user = User::find($user_data->id);
 
-            if($user->remember_token!==''){
+
+            if($user->remember_token != '' || $user->remember_token !== null){
 
                 return response()->json(['error' => 'Locked'], 203);
 
@@ -49,7 +50,7 @@ class AuthController extends Controller
 //                $user->remember_token = substr($token,0,32);
 //                $user->save();
 
-                return $this->respondWithToken($token);  
+                return $this->respondWithToken($token);
 
             }
 

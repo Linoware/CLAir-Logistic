@@ -37869,8 +37869,10 @@ function _exec(fn) {
 
   data: function data() {
     return {
+
       navMenuGroups: [{
-        hasGroup: false, navMenuItems: [{
+        hasGroup: false,
+        navMenuItems: [{
           icon: 'ion ion-md-speedometer', label: 'Dashboard', route: '/dashboards', childrends: [{
             label: 'Dashboard 1', route: '/dashboards/dashboard-1'
           }]
@@ -85842,7 +85844,7 @@ var staticRenderFns = [
       "div",
       {
         staticClass:
-          "container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3"
+          "container-fluid fixed-bottom d-flex flex-wrap justify-content-between text-center container-p-x pb-3"
       },
       [
         _c("div", { staticClass: "pt-3" }, [

@@ -35,3 +35,6 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::resource('products','ProductsController');
 
 });
+
+
+Route::resource('freight','FreightController');

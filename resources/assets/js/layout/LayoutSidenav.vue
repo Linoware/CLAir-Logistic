@@ -30,7 +30,7 @@
           <sidenav-router-link v-else :icon="navMenuItem.icon" :to="navMenuItem.route" :exact="true">{{ navMenuItem.label }}</sidenav-router-link>
 
         </div>
-        
+
       </div>
 
     </div>
@@ -54,9 +54,11 @@ export default {
 
   data(){
     return{
+
       navMenuGroups:[
         {
-          hasGroup:false,navMenuItems:[
+          hasGroup: false,
+          navMenuItems:[
             {
               icon:'ion ion-md-speedometer',label:'Dashboard',route:'/dashboards',childrends:[
                 {
@@ -78,7 +80,7 @@ export default {
             ]
         },
       ],
-      
+
     }
   },
 

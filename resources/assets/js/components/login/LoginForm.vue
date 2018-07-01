@@ -4,12 +4,12 @@
 	<notifications group="error-notifications" position="top center" />
 	<notifications group="-success-notifications" position="top center" />
 	<div class="row">
-		<b-card no-body img-alt="Card image cap" class="card-condenced" style="max-width: 20rem;">
+		<b-card no-body img-alt="Card image cap" class="card-condenced" style="width: 280px; height: 360px;">
 			<b-card-body>
-				<div style="width:220px;">
+				<div style="width:245px; height: 290px;">
 				  <!-- Logo -->
 				  <div class="d-flex justify-content-center align-items-center">
-					<div style="width:76px; height:76px;">
+					<div style="width:76px; height:76px; margin-top: 20px;">
 						<a href="javascript:void(0)" class="img-thumbnail">
 						  <img src="/static/img/logo/CL-Air-Logo.png" alt class="img-fluid">
 						</a>
@@ -21,7 +21,7 @@
 						<span class="text-danger">CL AIR EXPRESS</span>
 					</div>
 				  <!-- Form -->
-				  <form class="my-3" @submit.prevent="authenticate">
+				  <form class="my-3" @submit.prevent="authenticate" style="width: 100%; margin-top:30px !important;">
 					<!--<div class="form-group row" v-if="authError">
 						<p class="error">
 							{{ authError }}

@@ -34,8 +34,20 @@ class FreightController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return response()->json($request);
+
+      // $origin_country_id = $request->origin_country_id;
+    	// $origin_province_id = $request->origin_province_id;
+    	// $origin_city_id = $request->origin_city_id;
+      //
+    	// $des_country_id = $request->des_country_id;
+    	// $des_province_id = $request->des_province_id;
+    	// $des_city_id = $request->des_city_id;
+      //
+    	// $weight = $request->weight;
+    	// $declare_value = $request->declare_value;
+
+      return response()->json($request);
+
     }
 
     /**

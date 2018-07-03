@@ -83509,76 +83509,78 @@ var render = function() {
               "b-card",
               {
                 staticClass: "card-condenced",
-                staticStyle: { width: "280px", height: "360px" },
+                staticStyle: { width: "280px" },
                 attrs: { "no-body": "", "img-alt": "Card image cap" }
               },
               [
                 _c("b-card-body", [
-                  _c(
-                    "div",
-                    { staticStyle: { width: "245px", height: "290px" } },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "d-flex justify-content-center align-items-center"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticStyle: {
-                                width: "76px",
-                                height: "76px",
-                                "margin-top": "20px"
-                              }
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "img-thumbnail",
-                                  attrs: { href: "javascript:void(0)" }
-                                },
-                                [
-                                  _c("img", {
-                                    staticClass: "img-fluid",
-                                    attrs: {
-                                      src: "/static/img/logo/CL-Air-Logo.png",
-                                      alt: ""
-                                    }
-                                  })
-                                ]
-                              )
-                            ]
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "sm-12 text-center" }, [
+                  _c("div", { staticStyle: { width: "245px" } }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "d-flex justify-content-center align-items-center",
+                        staticStyle: { "margin-top": "30px" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          { staticStyle: { width: "76px", height: "76px" } },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "img-thumbnail",
+                                attrs: { href: "javascript:void(0)" }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "img-fluid",
+                                  attrs: {
+                                    src: "/static/img/logo/CL-Air-Logo.png",
+                                    alt: ""
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "sm-12 text-center",
+                        staticStyle: { "margin-top": "10px", color: "#E50000" }
+                      },
+                      [
                         _c("span", { staticClass: "text-danger" }, [
                           _vm._v("CL AIR EXPRESS")
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "form",
-                        {
-                          staticClass: "my-3",
-                          staticStyle: {
-                            width: "100%",
-                            "margin-top": "30px !important"
-                          },
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.authenticate($event)
-                            }
-                          }
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        staticClass: "my-3",
+                        staticStyle: {
+                          width: "100%",
+                          "margin-top": "30px !important"
                         },
-                        [
-                          _c("b-form-group", [
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.authenticate($event)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "b-form-group",
+                          { staticStyle: { "margin-bottom": "10px" } },
+                          [
                             _c(
                               "div",
                               { staticClass: "input-group" },
@@ -83597,7 +83599,8 @@ var render = function() {
                                       [
                                         _c("i", {
                                           staticClass:
-                                            "ion d-block ion-ios-person"
+                                            "ion d-block ion-ios-person",
+                                          staticStyle: { color: "lightgray" }
                                         })
                                       ]
                                     )
@@ -83617,9 +83620,13 @@ var render = function() {
                               ],
                               1
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c("b-form-group", [
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "b-form-group",
+                          { staticStyle: { "margin-bottom": "20px" } },
+                          [
                             _c(
                               "div",
                               { staticClass: "input-group" },
@@ -83637,7 +83644,9 @@ var render = function() {
                                       },
                                       [
                                         _c("i", {
-                                          staticClass: "ion d-block ion-ios-key"
+                                          staticClass:
+                                            "ion d-block ion-ios-key",
+                                          staticStyle: { color: "lightgray" }
                                         })
                                       ]
                                     )
@@ -83660,36 +83669,37 @@ var render = function() {
                               ],
                               1
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "d-flex justify-content-between align-items-center m-0"
-                            },
-                            [
-                              _c(
-                                "ladda-btn",
-                                {
-                                  staticClass:
-                                    "btn btn-danger col-sm-12 col-md-12 col-xl-12 mb-12",
-                                  attrs: {
-                                    type: "submit",
-                                    loading: _vm.loading,
-                                    "data-style": "expand-left"
-                                  }
-                                },
-                                [_vm._v("Submit")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ]
-                  ),
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "d-flex justify-content-between align-items-center m-0"
+                          },
+                          [
+                            _c(
+                              "ladda-btn",
+                              {
+                                staticClass:
+                                  "btn btn-danger col-sm-12 col-md-12 col-xl-12 mb-12",
+                                staticStyle: { "background-color": "#E50000" },
+                                attrs: {
+                                  type: "submit",
+                                  loading: _vm.loading,
+                                  "data-style": "expand-left"
+                                }
+                              },
+                              [_vm._v("Submit")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "dropdown-divider" }),
                   _vm._v(" "),

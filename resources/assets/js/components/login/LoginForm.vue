@@ -46,7 +46,7 @@
 					</b-form-group>
 
 					<div class="d-flex justify-content-between align-items-center m-0">
-					  <ladda-btn type="submit" :loading="loading" data-style="expand-left" style="background-color:#E50000;" class="btn btn-danger col-sm-12 col-md-12 col-xl-12 mb-12">Submit</ladda-btn>
+					  <ladda-btn type="submit" :loading="loading" data-style="expand-left" style="background-color:#E50000;" class="btn btn-danger col-sm-12 col-md-12 col-xl-12 mb-12">Log in</ladda-btn>
 					</div>
 				  </form>
 				  <!-- / Form -->

@@ -83691,7 +83691,7 @@ var render = function() {
                                   "data-style": "expand-left"
                                 }
                               },
-                              [_vm._v("Submit")]
+                              [_vm._v("Log in")]
                             )
                           ],
                           1

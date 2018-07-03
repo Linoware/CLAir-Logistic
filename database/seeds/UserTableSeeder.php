@@ -17,24 +17,11 @@ class UserTableSeeder extends Seeder
         $role_admin = App\Role::where('name','Admin')->first();
 
         $user = new User();
-        $user->name = 'Snak';
-        $user->email = 'snake@user.com';
-        $user->password = bcrypt('user');
+        $user->name = 'SYSTEM';
+        $user->email = 'system@clairexpress.com';
+        $user->password = bcrypt('SYSTEM');
         $user->save();
-        $user->roles()->attach($role_user);
+        $user->roles()->attach($role_admin);
 
-        $author = new User();
-        $author->name = 'Bright';
-        $author->email = 'bright@author.com';
-        $author->password = bcrypt('author');
-        $author->save();
-        $author->roles()->attach($role_author);
-
-        $admin = new User();
-        $admin->name = 'Evile';
-        $admin->email = 'Evile@admin.com';
-        $admin->password = bcrypt('admin');
-        $admin->save();
-        $admin->roles()->attach($role_admin);
     }
 }

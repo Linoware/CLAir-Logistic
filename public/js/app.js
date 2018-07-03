@@ -37311,6 +37311,11 @@ function setAuthorization(token) {
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -37321,8 +37326,8 @@ function setAuthorization(token) {
     data: function data() {
         return {
             form: {
-                name: '',
-                password: ''
+                name: 'SYSTEM',
+                password: 'SYSTEM'
             },
             error: null,
             loading: false,
@@ -83509,206 +83514,231 @@ var render = function() {
               "b-card",
               {
                 staticClass: "card-condenced",
-                staticStyle: { width: "280px" },
+                staticStyle: { width: "300px" },
                 attrs: { "no-body": "", "img-alt": "Card image cap" }
               },
               [
-                _c("b-card-body", [
-                  _c("div", { staticStyle: { width: "245px" } }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "d-flex justify-content-center align-items-center",
-                        staticStyle: { "margin-top": "30px" }
-                      },
-                      [
-                        _c(
-                          "div",
-                          { staticStyle: { width: "76px", height: "76px" } },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "img-thumbnail",
-                                attrs: { href: "javascript:void(0)" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid",
-                                  attrs: {
-                                    src: "/static/img/logo/CL-Air-Logo.png",
-                                    alt: ""
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "sm-12 text-center",
-                        staticStyle: { "margin-top": "10px", color: "#E50000" }
-                      },
-                      [
-                        _c("span", { staticClass: "text-danger" }, [
-                          _vm._v("CL AIR EXPRESS")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "form",
-                      {
-                        staticClass: "my-3",
-                        staticStyle: {
-                          width: "100%",
-                          "margin-top": "30px !important"
+                _c(
+                  "b-card-body",
+                  {
+                    staticStyle: {
+                      "padding-left": "30px",
+                      "padding-right": "30px"
+                    }
+                  },
+                  [
+                    _c("div", [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "d-flex justify-content-center align-items-center",
+                          staticStyle: { "margin-top": "40px" }
                         },
-                        on: {
-                          submit: function($event) {
-                            $event.preventDefault()
-                            return _vm.authenticate($event)
+                        [
+                          _c(
+                            "div",
+                            { staticStyle: { width: "76px", height: "76px" } },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "img-thumbnail",
+                                  attrs: { href: "javascript:void(0)" }
+                                },
+                                [
+                                  _c("img", {
+                                    staticClass: "img-fluid",
+                                    attrs: {
+                                      src: "/static/img/logo/CL-Air-Logo.png",
+                                      alt: ""
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "sm-12 text-center",
+                          staticStyle: {
+                            "margin-top": "10px",
+                            color: "#E50000"
                           }
-                        }
-                      },
-                      [
-                        _c(
-                          "b-form-group",
-                          { staticStyle: { "margin-bottom": "10px" } },
-                          [
-                            _c(
-                              "div",
-                              { staticClass: "input-group" },
-                              [
-                                _c(
-                                  "div",
-                                  { staticClass: "input-group-prepend" },
-                                  [
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass:
-                                          "input-group-text bg-light",
-                                        attrs: { id: "basic-addon1" }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass:
-                                            "ion d-block ion-ios-person",
-                                          staticStyle: { color: "lightgray" }
-                                        })
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("b-input", {
-                                  attrs: { placeholder: "Username" },
-                                  model: {
-                                    value: _vm.form.name,
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.form, "name", $$v)
-                                    },
-                                    expression: "form.name"
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "b-form-group",
-                          { staticStyle: { "margin-bottom": "20px" } },
-                          [
-                            _c(
-                              "div",
-                              { staticClass: "input-group" },
-                              [
-                                _c(
-                                  "div",
-                                  { staticClass: "input-group-prepend" },
-                                  [
-                                    _c(
-                                      "span",
-                                      {
-                                        staticClass:
-                                          "input-group-text bg-light",
-                                        attrs: { id: "basic-addon1" }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass:
-                                            "ion d-block ion-ios-key",
-                                          staticStyle: { color: "lightgray" }
-                                        })
-                                      ]
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("b-input", {
-                                  attrs: {
-                                    type: "password",
-                                    placeholder: "Password"
-                                  },
-                                  model: {
-                                    value: _vm.form.password,
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.form, "password", $$v)
-                                    },
-                                    expression: "form.password"
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "d-flex justify-content-between align-items-center m-0"
+                        },
+                        [
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v("CL AIR EXPRESS")
+                          ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "form",
+                        {
+                          staticClass: "my-3",
+                          staticStyle: {
+                            width: "100%",
+                            "margin-top": "40px !important"
                           },
-                          [
-                            _c(
-                              "ladda-btn",
-                              {
-                                staticClass:
-                                  "btn btn-danger col-sm-12 col-md-12 col-xl-12 mb-12",
-                                staticStyle: { "background-color": "#E50000" },
-                                attrs: {
-                                  type: "submit",
-                                  loading: _vm.loading,
-                                  "data-style": "expand-left"
-                                }
-                              },
-                              [_vm._v("Log in")]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "dropdown-divider" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "sm-12 text-center" }, [
-                    _c("small", { staticClass: "text-gray" }, [
-                      _vm._v("CL Air System V 1.0")
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              return _vm.authenticate($event)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "b-form-group",
+                            {
+                              staticStyle: {
+                                "margin-bottom": "10px",
+                                height: "36px"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "input-group" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-group-prepend" },
+                                    [
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass:
+                                            "input-group-text bg-light",
+                                          attrs: { id: "basic-addon1" }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ion d-block ion-ios-person",
+                                            staticStyle: { color: "lightgray" }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("b-input", {
+                                    attrs: { placeholder: "Username" },
+                                    model: {
+                                      value: _vm.form.name,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.form, "name", $$v)
+                                      },
+                                      expression: "form.name"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-form-group",
+                            {
+                              staticStyle: {
+                                "margin-bottom": "20px",
+                                height: "36px"
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                { staticClass: "input-group" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-group-prepend" },
+                                    [
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass:
+                                            "input-group-text bg-light",
+                                          attrs: { id: "basic-addon1" }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "ion d-block ion-ios-key",
+                                            staticStyle: { color: "lightgray" }
+                                          })
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("b-input", {
+                                    attrs: {
+                                      type: "password",
+                                      placeholder: "Password"
+                                    },
+                                    model: {
+                                      value: _vm.form.password,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.form, "password", $$v)
+                                      },
+                                      expression: "form.password"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "d-flex justify-content-between align-items-center m-0"
+                            },
+                            [
+                              _c(
+                                "ladda-btn",
+                                {
+                                  staticClass:
+                                    "btn btn-danger col-sm-12 col-md-12 col-xl-12 mb-12",
+                                  staticStyle: {
+                                    "background-color": "#E50000",
+                                    height: "36px"
+                                  },
+                                  attrs: {
+                                    type: "submit",
+                                    loading: _vm.loading,
+                                    "data-style": "expand-left"
+                                  }
+                                },
+                                [_vm._v("Log in")]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "dropdown-divider" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "sm-12 text-center" }, [
+                      _c("small", { staticClass: "text-gray" }, [
+                        _vm._v("CL Air System V 1.0")
+                      ])
                     ])
-                  ])
-                ])
+                  ]
+                )
               ],
               1
             )

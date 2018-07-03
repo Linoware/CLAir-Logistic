@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="default-style layout-navbar-fixed layout-fixed-offcanvas" lang={{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,9 +8,9 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content={{ csrf_token() }}">
-	<meta name="user" content="Auth::user()">
+	  <meta name="user" content="Auth::user()">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ 'CL AIR EXPRESS' }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -68,7 +69,7 @@
     <!-- Core scripts -->
   <script src="{{ asset('assets/vendor/js/pace.js') }}"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  
+
 
 </head>
 <body >
@@ -81,12 +82,12 @@
       </div>
     </div>
     <!-- / Splash screen -->
-    
+
     @yield('content')
-    
+
   <!-- Core scripts -->
   <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
-  
+
   <script src="{{ asset('assets/vendor/js/sidenav.js') }}"></script>
   <!-- Libs -->
   <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
@@ -95,9 +96,9 @@
   <script src="{{ asset('assets/js/main.js') }}"></script>
   <script type="text/javascript">
     $(document).ready(function(e){
-      // $('.theme-settings-open-btn').css('visibility','hidden');  
+      // $('.theme-settings-open-btn').css('visibility','hidden');
     })
-    
+
   </script>
   <script>
 	 window.Laravel = {!! json_encode([

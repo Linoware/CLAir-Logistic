@@ -4,11 +4,12 @@
 	<notifications group="error-notifications" position="top center" />
 	<notifications group="-success-notifications" position="top center" />
 	<div class="row">
-		<b-card no-body img-alt="Card image cap" class="card-condenced" style="width: 280px;">
-			<b-card-body>
-				<div style="width:245px;">
+		<b-card no-body img-alt="Card image cap" class="card-condenced" style="width: 300px;">
+			<b-card-body style="padding-left:30px; padding-right:30px;">
+				<div>
+
 				  <!-- Logo -->
-				  <div class="d-flex justify-content-center align-items-center" style="margin-top:30px;">
+				  <div class="d-flex justify-content-center align-items-center" style="margin-top:40px;">
 					<div style="width:76px; height:76px;">
 						<a href="javascript:void(0)" class="img-thumbnail">
 						  <img src="/static/img/logo/CL-Air-Logo.png" alt class="img-fluid">
@@ -16,19 +17,21 @@
 					</div>
 
 				  </div>
+
 				  <!-- / Logo -->
 					<div class="sm-12 text-center" style="margin-top:10px; color:#E50000;">
 						<span class="text-danger">CL AIR EXPRESS</span>
 					</div>
+
 				  <!-- Form -->
-				  <form class="my-3" @submit.prevent="authenticate" style="width: 100%; margin-top:30px !important;">
+				  <form class="my-3" @submit.prevent="authenticate" style="width: 100%; margin-top:40px !important;">
 					<!--<div class="form-group row" v-if="authError">
 						<p class="error">
 							{{ authError }}
 						</p>
 					</div>-->
 
-					<b-form-group style="margin-bottom:10px;">
+					<b-form-group style="margin-bottom:10px; height:36px;">
 						<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text bg-light" id="basic-addon1"><i style="color:lightgray;" class="ion d-block ion-ios-person"></i></span>
@@ -36,7 +39,8 @@
 							<b-input v-model="form.name" placeholder="Username" />
 						</div>
 					</b-form-group>
-					<b-form-group style="margin-bottom:20px;">
+
+					<b-form-group style="margin-bottom:20px; height:36px;">
 					  <div class="input-group">
 						<div class="input-group-prepend">
 						 <span class="input-group-text bg-light" id="basic-addon1"><i style="color:lightgray;" class="ion d-block ion-ios-key"></i></span>
@@ -46,7 +50,7 @@
 					</b-form-group>
 
 					<div class="d-flex justify-content-between align-items-center m-0">
-					  <ladda-btn type="submit" :loading="loading" data-style="expand-left" style="background-color:#E50000;" class="btn btn-danger col-sm-12 col-md-12 col-xl-12 mb-12">Log in</ladda-btn>
+					  <ladda-btn type="submit" :loading="loading" data-style="expand-left" style="background-color:#E50000; height:36px" class="btn btn-danger col-sm-12 col-md-12 col-xl-12 mb-12">Log in</ladda-btn>
 					</div>
 				  </form>
 				  <!-- / Form -->
@@ -87,18 +91,19 @@
     transform: translateX(-500px) scale(0.2);
   }
 </style>
+
 <script>
     import {login} from '../../helpers/auth';
     import axios from 'axios'
-	import LaddaBtn from '../../vendor/libs/ladda/Ladda'
+	  import LaddaBtn from '../../vendor/libs/ladda/Ladda'
     export default {
         name: "login",
 		components:{LaddaBtn},
         data() {
             return {
                 form: {
-                    name: '',
-                    password: ''
+                    name: 'SYSTEM',
+                    password: 'SYSTEM'
                 },
                 error: null,
 				loading: false,

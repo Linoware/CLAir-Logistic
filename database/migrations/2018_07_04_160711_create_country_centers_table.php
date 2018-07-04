@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCitiesZonesDetailTable extends Migration
+class CreateCountryCentersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateCitiesZonesDetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('cities_zones_detail', function (Blueprint $table) {
+        Schema::create('country_centers', function (Blueprint $table) {
 
-            $table->integer('city_zone_id');
-            $table->integer('city_id');
+            $table->increments('center_id');
+            $table->integer('country_id');
+            $table->integer('province_id');
+            $table->boolean('is_province_default');
 
             $table->boolean('enable_status');
             $table->integer('created_by');
@@ -33,6 +35,6 @@ class CreateCitiesZonesDetailTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cities_zones_detail');
+        Schema::dropIfExists('country_centers');
     }
 }

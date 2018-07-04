@@ -1,5 +1,6 @@
 import Layout from '../layout/Layout1'
 import Users from '../components/users/Users'
+import Form from '../components/users/Form'
 
 export default{
     path:'/users',
@@ -9,5 +10,9 @@ export default{
             path: 'list',
             component: Users
         },
+        {
+            path: 'create',
+            component: Form
+        }
     ]
 }

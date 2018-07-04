@@ -1,5 +1,10 @@
 <template>
     <div>
+
+        <breadcrumb v-bind:items="items"/>
+
+        <left-align-button v-bind:enable-add-new-button="true" v-bind:route-url="routeUrl"/>
+
         <div class="row" v-show="!loading">
 
             <div class="col">
@@ -49,14 +54,22 @@
     </div>
 </template>
 <script>
+    import breadcrumb from '../breadcrumbs/simpleBreadcrumb'
+    import leftAlignButton from '../actionbuttons/leftAlignButton'
     export default{
         model:{
           event:'change'
         },
         props:[
             'api',
-            'loading'
+            'loading',
+            'items',
+            'routeUrl'
         ],
+        components:{
+            breadcrumb,
+            leftAlignButton
+        },
         data(){
             return{
                 jsonData: [],
@@ -76,7 +89,7 @@
                 isFixed: false,
                 isDark: false,
                 isFootClone: false,
-                headerStyle: 'dark'
+                headerStyle: 'dark',
             }
         },
         created(){

@@ -1,17 +1,18 @@
-require('./bootstrap');
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Vuex from 'vuex';
-import router from './router';
-import StoreData from './store';
-import App from './App.vue';
-import {initialize} from './helpers/general';
+require('./bootstrap')
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Vuex from 'vuex'
+import router from './router'
+import StoreData from './store'
+import App from './App.vue'
+import {initialize} from './helpers/general'
 import globals from './globals'
 import Popper from 'popper.js'
 import BootstrapVue from 'bootstrap-vue'
 import Notifications from 'vue-notification'
 import Toasted from 'vue-toasted'
 import VueFroala from 'vue-froala-wysiwyg'
+import VeeValidate from 'vee-validate'
 
 require('froala-editor/js/froala_editor.pkgd.min')
 require('froala-editor/css/froala_editor.pkgd.min.css')
@@ -25,20 +26,21 @@ Vue.config.productionTip = false
 
 
 Vue.use(Vuex)
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 Vue.use(Notifications)
 Vue.use(Toasted)
 Vue.use(VueFroala)
+Vue.use(VeeValidate)
 
 // Global RTL flag
 Vue.mixin({
   data: globals
 })
 
-const store = new Vuex.Store(StoreData);
+const store = new Vuex.Store(StoreData)
 
-initialize(store, router);
+initialize(store, router)
 
 const app = new Vue({
     el: '#app',
@@ -53,7 +55,7 @@ const app = new Vue({
     },
     methods:{
     	handler(){
-    		return 'hello';
+    		return 'hello'
     	}
     }
 });

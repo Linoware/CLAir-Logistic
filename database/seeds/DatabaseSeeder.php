@@ -28,6 +28,19 @@ class DatabaseSeeder extends Seeder
         $this->call(CountryCentersTableSeeder::class);
         $this->call(CountryCentersCitiesZonesTableSeeder::class);
 
+        $this->call(RoutesTableSeeder::class);
+        $this->call(FreightsTableSeeder::class);
+        $this->call(FreightOriginProvincesTableSeeder::class);
+        $this->call(FreightDestinationProvincesTableSeeder::class);
+        $this->call(FreightChargesTableSeeder::class);
+
+
+
+
+
+
+
+
 
 
 

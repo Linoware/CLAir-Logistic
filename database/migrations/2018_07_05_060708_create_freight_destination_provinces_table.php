@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFreightOriginProvincesTable extends Migration
+class CreateFreightDestinationProvincesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFreightOriginProvincesTable extends Migration
      */
     public function up()
     {
-        Schema::create('freight_origin_provinces', function (Blueprint $table) {
+        Schema::create('freight_destination_provinces', function (Blueprint $table) {
 
             $table->integer('freight_id');
             $table->integer('province_id');
@@ -35,6 +35,6 @@ class CreateFreightOriginProvincesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('freight_origin_provinces');
+        Schema::dropIfExists('freight_destination_provinces');
     }
 }

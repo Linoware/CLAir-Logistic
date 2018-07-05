@@ -17,6 +17,7 @@ class CreateCountriesTable extends Migration
 
             $table->increments('country_id');
             $table->string('country_name');
+            $table->string('country_name_native');
             $table->string('country_code')->nullable();
             $table->string('country_short_code')->nullable();
 

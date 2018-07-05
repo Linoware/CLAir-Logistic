@@ -18,7 +18,8 @@ class CountriesTableSeeder extends Seeder
         //
         DB::table('countries')->insert([
 
-          'country_name' => 'Cambdodia',
+          'country_name' => 'Cambodia',
+          'country_name_native' => 'កម្ពុជា',
           'country_code' => '855',
           'country_short_code' => 'KH',
 
@@ -33,6 +34,7 @@ class CountriesTableSeeder extends Seeder
         DB::table('countries')->insert([
 
           'country_name' => 'Thailand',
+          'country_name_native' => 'ថៃ',
           'country_code' => '66',
           'country_short_code' => 'TH',
 

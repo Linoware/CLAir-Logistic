@@ -14,8 +14,18 @@ class CreateFreightsTable extends Migration
     public function up()
     {
         Schema::create('freights', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+
+            $table->increments('freight_id');
+
+            $table->integer('route_id');
+
+            $table->string('description');
+
+            $table->boolean('enable_status');
+            $table->integer('created_by');
+            $table->datetime('created_at');
+            $table->integer('updated_by');
+            $table->datetime('updated_at');
         });
     }
 

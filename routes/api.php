@@ -36,5 +36,8 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
 
 });
 
+Route::resource('country','AvailableCountriesController');
+Route::resource('province','AvailableProvincesController');
+Route::resource('city','AvailableCitiesController');
 
 Route::resource('freight','FreightController');

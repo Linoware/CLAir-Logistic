@@ -69,8 +69,8 @@
                 originalJsonData: [],
 
                 // Pagination
-                perPageOptions: [1,10, 20, 30, 40, 50],
-                perPage: 10,
+                perPageOptions: [25, 50, 100],
+                perPage: 25,
                 currentPage: 1,
 
                 // Table options

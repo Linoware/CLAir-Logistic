@@ -19,7 +19,7 @@ class AvailableCountriesController extends Controller
 //        $data['header'] = $request->header();
 
         $data['success'] = true;
-        $data['payload']['data'] = AvailableCountry::all();
+        $data['payload']['data'] = AvailableCountry::all(['country_id','country_name','country_code','country_short_code']);
         $data['error'] = array();
 
         return response()->json($data);

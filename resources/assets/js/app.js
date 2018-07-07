@@ -2,6 +2,7 @@ require('./bootstrap')
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuex from 'vuex'
+
 import router from './router'
 import StoreData from './store'
 import App from './App.vue'
@@ -31,7 +32,7 @@ Vue.use(BootstrapVue)
 Vue.use(Notifications)
 Vue.use(Toasted)
 Vue.use(VueFroala)
-Vue.use(VeeValidate)
+Vue.use(VeeValidate, {fieldsBagName: 'formFields'})
 
 // Global RTL flag
 Vue.mixin({

@@ -12,9 +12,9 @@ export function initialize(store, router) {
         }
     });
     
-    axios.interceptors.response.use(null, (error) => {
+    axios.interceptors.response.use(null,(error) => {
 
-        if (!!error.response.status || error.resposne.status == 401 || 203) {
+        if (error.response.status == 401 || 203) {
 
             store.commit('logout');
             router.push('/login');
@@ -22,6 +22,7 @@ export function initialize(store, router) {
         }
 
         return Promise.reject(error);
+
     });
 
     if (store.getters.currentUser) {

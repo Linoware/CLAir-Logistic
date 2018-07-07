@@ -3,17 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\AvailableCity;
 
-class FreightController extends Controller
+class AvailableCitiesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $province_id = $request->province_id;
+
+        //
+        $payload_data = AvailableCity::all()->where('province_id', $province_id);
+
+        //
+        $data['success'] = true;
+        $data['payload']['data'] = $payload_data;
+        $data['error'] = array();
+
+        return response()->json($data);
+
     }
 
     /**
@@ -24,40 +37,17 @@ class FreightController extends Controller
     public function create()
     {
         //
-
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     *
-     *
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
-        $header = $request->header();
-
-//       $origin_country_id = $request->origin_country_id;
-//    	 $origin_province_id = $request->origin_province_id;
-//    	 $origin_city_id = $request->origin_city_id;
-//
-//    	 $des_country_id = $request->des_country_id;
-//    	 $des_province_id = $request->des_province_id;
-//    	 $des_city_id = $request->des_city_id;
-//
-//    	 $weight = $request->weight;
-//    	 $declare_value = $request->declare_value;
-
-        // get
-
-
-
-      return response()->json($request);
-
+        //
     }
 
     /**
@@ -104,8 +94,4 @@ class FreightController extends Controller
     {
         //
     }
-
-
-
-
 }

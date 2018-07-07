@@ -103,11 +103,6 @@
                     this.jsonData = res.data
                     this.originalJsonData = res.data.slice(0)
                     this.$emit('change',this.loading)
-                }).catch((err) => {
-                    if(err.response.status === 401) {
-                        this.$store.commit('logout');
-                        this.$router.push('/Login');
-                    }
                 })
             },
             filter (value) {

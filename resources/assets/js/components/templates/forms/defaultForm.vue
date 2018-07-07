@@ -10,14 +10,14 @@
                 <b-card-body>
                     <b-form @submit.prevent="saveOrUpdateRecord">
                         <b-form-row>
-                            <b-form-group horizontal :label="formControl.require ? formControl.label+'*' : formControl.label" v-for="(formControl,f) in formControls" :key="f" :class="formControl.class">
+                            <b-form-group horizontal :label="formControl.require ? formControl.label+'*' : formControl.label" v-for="(formControl,f) in formControls" :key="f" :class="formControl.class" class="text-right">
 
                                 <b-input v-if = "formControl.name == 'password'" v-validate = "formControl.require ? 'required' : ''" ref = "confirmation" :name="formControl.label" v-model = "formData[formControl.name]" :type="formControl.type"/>
                                 <b-input v-else-if = "formControl.name == 'confirm_password'" v-validate="'required|confirmed:confirmation'" :name = "formControl.label" v-model = "formData[formControl.name]" :type = "formControl.type"/>
                                 <b-input v-else-if = "formControl.name == 'email'" v-validate = "'required|email'" :name = "formControl.label" v-model = "formData[formControl.name]" :type = "formControl.type"/>
                                 <b-input v-else :type = "formControl.type" v-validate = "formControl.require ? 'required' : ''" :name = "formControl.label"  v-model = "formData[formControl.name]" />
-                                <span class="text-danger">{{ errors.first(formControl.label) }}</span>
-
+                                <span class="text-danger">{{ errors.first(formControl.label) }}</span><!--Client validation message-->
+                                <span class="text-danger">{{ backend_errors[formControl.name] }}</span><!--Backend validation message-->
                             </b-form-group>
                         </b-form-row>
                     </b-form>
@@ -53,6 +53,7 @@
 
             return{
                 valid:null,
+                backend_errors:{}
             }
 
         },
@@ -68,18 +69,14 @@
                             axios.put(this.api+'/'+this.recordId,this.formData).then(response=>{
                                 console.log(response.data);
                             }).catch((err) => {
-                                if(err.response.status === 401) {
-                                    this.$store.commit('logout');
-                                    this.$router.push('/Login');
-                                }
+
                             })
                         }else{
                             axios.post(this.api,this.formData).then((response)=>{
                                 console.log(response.data);
                             }).catch((err) => {
-                                if(err.response.status === 401) {
-                                    this.$store.commit('logout');
-                                    this.$router.push('/Login');
+                                if(err.response.status === 422) {
+                                    this.backend_errors = err.response.data.errors
                                 }
                             })
                         }

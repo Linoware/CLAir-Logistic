@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Modules\RecordHelper;
+use App\Modules\JSONResponseFormater;
+use Illuminate\Validation\Validator;
 use App\User;
 
 class UsersController extends Controller
 {
+    use RecordHelper, JSONResponseFormater;
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +40,25 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($request);
+        $model = new User;
+
+        $data = $model->getFillable();
+        $data = $request->only($data);
+
+        $rules = array(
+            'name' => 'required|unique:users,name|min:5',
+            'email' => 'required|email|unique:users,email'
+        );
+
+        $isSaved = $this->SaveRecord(new User, $data, $rules);
+
+        return $isSaved;
+
+    }
+
+    public function formValidator(Validator $validator)
+    {
+        return $validator->errors()->all();
     }
 
     /**

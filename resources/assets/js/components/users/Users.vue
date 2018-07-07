@@ -3,7 +3,8 @@
 
         <breadcrumb v-bind:items="breadcrumb_items"/>
 
-        <two-cube-spin v-show="loading"></two-cube-spin>
+        <!--<two-cube-spin v-show="loading"></two-cube-spin>-->
+        <vue-block-ui v-if="loading"></vue-block-ui>
 
         <data-table v-bind:api="api" v-bind:route-url="'/users/create'" v-on:change="removeLoading" v-show="!loading"/>
     </div>
@@ -12,6 +13,7 @@
 <script>
     import Breadcrumb from '../templates/breadcrumbs/simpleBreadcrumb'
     import TwoCubeSpin from '../spinkits/TwoCubeSpin'
+    import VueBlockUi from '../spinkits/VueBlockUi'
     import DataTable from '../templates/bootstrapdatatable/simpleDataTable'
     export default{
         name:'users',
@@ -21,6 +23,7 @@
         components:{
             Breadcrumb,
             TwoCubeSpin,
+            VueBlockUi,
             DataTable
         },
         data(){

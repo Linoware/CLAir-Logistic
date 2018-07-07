@@ -18,8 +18,8 @@
 
       <div  v-for="(navMenuGroup,i) in navMenuGroups" :key="i" style="width: 100%;">
 
-        <sidenav-divider v-show="navMenuGroup.hasGroup" class="mb-1"/>
-        <sidenav-header v-show="navMenuGroup.hasGroup" class="small font-weight-semibold">{{ navMenuGroup.label }}</sidenav-header>
+        <sidenav-divider v-show="navMenuGroup.hasSection" class="mb-1"/>
+        <sidenav-header v-show="navMenuGroup.hasSection" class="small font-weight-semibold">{{ navMenuGroup.label }}</sidenav-header>
 
         <div v-for="(navMenuItem,menu) in navMenuGroup.navMenuItems" :key="menu">
           <sidenav-menu v-if="navMenuItem.childrends.length>0" :icon="navMenuItem.icon" :active="isMenuActive(navMenuItem.route)" :open="isMenuOpen(navMenuItem.route)">
@@ -57,7 +57,7 @@ export default {
 
       navMenuGroups:[
         {
-          hasGroup: false,
+          hasSection: false,
           navMenuItems:[
             {
               icon:'ion ion-md-speedometer',label:'Dashboard',route:'/dashboards',childrends:[
@@ -69,11 +69,28 @@ export default {
           ]
         },
         {
-            hasGroup:false,label:'Users',navMenuItems:[
+            hasSection:false,label:'Users',navMenuItems:[
                 {
                     icon:'ion ion-ios-people',label:'Users',route:'/users',childrends:[
                         {
                             label:'Users List',route:'/users/list'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            hasSection:false,navMenuItems:[
+                {
+                    icon:'ion ion-md-download',label:'Freights',route:'/freights',childrends:[
+                        {
+                            label:'Countries',route:'/freights/countries'
+                        },
+                        {
+                            label:'Provinces',route:'/freights/provinces'
+                        },
+                        {
+                            label:'Cities',route:'/freights/cities'
                         }
                     ]
                 }

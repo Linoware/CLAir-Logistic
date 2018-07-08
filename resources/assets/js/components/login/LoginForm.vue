@@ -1,9 +1,9 @@
 <template>
 <div>
   <div class="authentication-wrapper authentication-1 px-4">
-	<notifications group="error-notifications" position="top center" />
-	<notifications group="-success-notifications" position="top center" />
-	<div class="row">
+	  <notifications group="error-notifications" position="top center" />
+	  <notifications group="-success-notifications" position="top center" />
+	  <div class="row">
 		<b-card no-body img-alt="Card image cap" class="card-condenced" style="width: 300px;">
 			<b-card-body style="padding-left:30px; padding-right:30px;">
 				<div>
@@ -95,7 +95,7 @@
 <script>
     import {login} from '../../helpers/auth';
     import axios from 'axios'
-	  import LaddaBtn from '../../vendor/libs/ladda/Ladda'
+	import LaddaBtn from '../../vendor/libs/ladda/Ladda'
     export default {
         name: "login",
 		components:{LaddaBtn},

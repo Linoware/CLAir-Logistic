@@ -14,6 +14,7 @@ import Notifications from 'vue-notification'
 import Toasted from 'vue-toasted'
 import VueFroala from 'vue-froala-wysiwyg'
 import VeeValidate from 'vee-validate'
+import VueBootstrapTable from 'vue-bootstrap-table2'
 
 require('froala-editor/js/froala_editor.pkgd.min')
 require('froala-editor/css/froala_editor.pkgd.min.css')
@@ -33,6 +34,7 @@ Vue.use(Notifications)
 Vue.use(Toasted)
 Vue.use(VueFroala)
 Vue.use(VeeValidate, {fieldsBagName: 'formFields'})
+Vue.use(VueBootstrapTable)
 
 // Global RTL flag
 Vue.mixin({

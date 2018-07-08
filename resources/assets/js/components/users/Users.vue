@@ -7,6 +7,7 @@
         <vue-block-ui v-if="loading"></vue-block-ui>
 
         <data-table v-bind:api="api" v-bind:route-url="'/users/create'" v-on:change="removeLoading" v-show="!loading"/>
+
     </div>
 </template>
 
@@ -24,7 +25,7 @@
             Breadcrumb,
             TwoCubeSpin,
             VueBlockUi,
-            DataTable
+            DataTable,
         },
         data(){
             return{

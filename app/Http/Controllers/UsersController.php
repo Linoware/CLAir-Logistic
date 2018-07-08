@@ -45,6 +45,8 @@ class UsersController extends Controller
         $data = $model->getFillable();
         $data = $request->only($data);
 
+        $data['password'] = bcrypt($data['password']);
+
         $rules = array(
             'name' => 'required|unique:users,name|min:5',
             'email' => 'required|email|unique:users,email'

@@ -41,6 +41,7 @@
   <link rel="stylesheet" href="{{ asset('assets/vendor/libs/ladda/ladda.css') }}">
  <script src="{{ asset('assets/vendor/js/material-ripple.js') }}"></script>
   <script src="{{ asset('assets/vendor/js/layout-helpers.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-table/bootstrap-table.css') }}">
    <!-- Theme settings -->
   <!-- This file MUST be included after core stylesheets and layout-helpers.js in the <head> section -->
   <!-- <script src="{{ asset('assets/vendor/js/theme-settings.js') }}"></script> -->
@@ -89,17 +90,21 @@
   <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
 
   <script src="{{ asset('assets/vendor/js/sidenav.js') }}"></script>
+     <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script>
+     <script src="{{ asset('assets/vendor/libs/tableexport/tableexport.js') }}"></script>
+     <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
+
   <!-- Libs -->
   <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
 
-  <!-- Demo -->
-  <script src="{{ asset('assets/js/main.js') }}"></script>
-  <script type="text/javascript">
-    $(document).ready(function(e){
-      // $('.theme-settings-open-btn').css('visibility','hidden');
-    })
+  <script src="{{ asset('assets/vendor/libs/bootstrap-table/bootstrap-table.js') }}"></script>
+  <script src="{{ asset('assets/vendor/libs/bootstrap-table/extensions/export/export.js') }}"></script>
 
-  </script>
+
+  <!-- Demo -->
+
+  <script src="{{ asset('assets/js/main.js') }}"></script>
+
   <script>
 	 window.Laravel = {!! json_encode([
 		'csrfToken' => csrf_token(),

@@ -10,10 +10,13 @@ import dashboardsRoutes from './dashboards'
 import layoutsRoutes from './layouts'
 import tables from './tables'
 import userRoutes from './users'
+import countryroutes from './country'
+import { routerHistory, writeHistory } from 'vue-router-back-button'
 
 Vue.use(Router)
 Vue.use(Meta)
 Vue.use(VueResource)
+Vue.use(routerHistory)
 let token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
@@ -38,6 +41,7 @@ const ROUTES = [
   .concat(layoutsRoutes)
   .concat(tables)
   .concat(userRoutes)
+  .concat(countryroutes)
   .concat(pagenotfound)
 
 const router = new Router({
@@ -48,6 +52,8 @@ const router = new Router({
     requiresAuth: true
   }
 })
+
+router.afterEach(writeHistory)
 
 router.afterEach(() => {
   // Remove initial splash screen

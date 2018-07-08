@@ -15,6 +15,7 @@ use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Exceptions\GuardDoesNotMatch;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use App\Role;
+use App\Country;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -25,6 +26,9 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var array
      */
+
+//    protected $primaryKey = 'user_id';
+
     protected $fillable = [
         'name', 'email', 'password','remember_token'
     ];
@@ -41,6 +45,11 @@ class User extends Authenticatable implements JWTSubject
     public function roles()
     {
         return $this->belongsToMany(Role::class,'user_role','user_id','role_id');
+    }
+
+    public function countries()
+    {
+        return $this->hasOne(Country::class,'created_by');
     }
 
     public function hasAnyRole($roles)

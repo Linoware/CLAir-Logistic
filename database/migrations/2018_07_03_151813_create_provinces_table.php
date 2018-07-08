@@ -16,7 +16,9 @@ class CreateProvincesTable extends Migration
         Schema::create('provinces', function (Blueprint $table) {
 
           $table->increments('province_id');
-          $table->integer('country_id');
+          $table->integer('country_id')->unsigned();
+
+
           $table->string('province_name');
           $table->string('province_code')->nullable();
           $table->string('province_short_code')->nullable();
@@ -26,6 +28,8 @@ class CreateProvincesTable extends Migration
           $table->datetime('created_at');
           $table->integer('updated_by');
           $table->datetime('updated_at');
+
+          $table->foreign('country_id')->references('country_id')->on('countries');
 
         });
     }

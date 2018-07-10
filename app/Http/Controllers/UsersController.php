@@ -18,7 +18,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all(['name','email','created_at','updated_at']);
+        $users = User::all(['id','name','email','created_at','updated_at']);
         return response()->json($users);
     }
 
@@ -82,7 +82,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $userData = User::findOrFail($id);
+
+        return response()->json($userData);
     }
 
     /**
@@ -105,6 +107,19 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $this->deleteRecords(new User, 'id', $id);
+
+        return $this->index();
+
+    }
+
+    public function multipleDelete(Request $request)
+    {
+
+        $this->deleteRecords(new User, 'id', $request->all());
+
+        return $this->index();
+
     }
 }

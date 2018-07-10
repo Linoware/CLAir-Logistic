@@ -6,7 +6,15 @@
         <!--<two-cube-spin v-show="loading"></two-cube-spin>-->
         <vue-block-ui v-if="loading"></vue-block-ui>
 
-        <data-table v-bind:api="api" v-bind:route-url="'/users/create'" v-on:change="removeLoading" v-show="!loading"/>
+        <data-table
+            v-bind:api="api"
+            v-bind:route-url="'/users/create'"
+            v-bind:view-url="'/users/view'"
+            v-bind:multiple-delete-api="'/api/users/multiple_delete'"
+            v-on:change="removeLoading"
+            v-show="!loading"
+            v-bind:fields="tableFields"
+        />
 
     </div>
 </template>
@@ -29,6 +37,28 @@
         },
         data(){
             return{
+                tableFields:{
+                    select_all:{
+                        label:''
+                    },
+                    name:{
+                        label: "Username",
+                        sortable: true
+                    },
+                    email:{
+                        label: "Email",
+                        sortable: true
+                    },
+                    created_at:{
+                        label: "Created By",
+                        sortable: true
+                    },
+                    action:{
+                        name:'name',
+                        label: "",
+                        id: "id"
+                    }
+                },
                 loading: true,
                 api: '/api/users',
                 breadcrumb_items:[

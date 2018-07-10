@@ -18,4 +18,9 @@ class Country extends Model
     {
         return $this->belongsTo(User::class,'created_by');
     }
+
+    public function updated_user()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
 }

@@ -13,6 +13,11 @@ export default{
         {
             path: 'create',
             component: Form
+        },
+        {
+            path: 'view/:id',
+            component: Form,
+            props: true
         }
     ]
 }

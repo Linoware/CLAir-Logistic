@@ -49,7 +49,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function countries()
     {
-        return $this->hasOne(Country::class,'created_by');
+        return $this->hasOne(Country::class,'created_by', 'updated_by');
     }
 
     public function hasAnyRole($roles)

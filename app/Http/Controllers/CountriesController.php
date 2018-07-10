@@ -21,13 +21,18 @@ class CountriesController extends Controller
      */
     public function index()
     {
-        $countries = Country::with('users')->get(['country_name','country_name_native','country_code','country_short_code','created_by','enable_status as enable']);
-//        $countries['created_by'] = $countries['users']['name'];
-//        $countries['created_by'] = User::with('countries')->get(['name']);
+        $countries = Country::with('users')->with('updated_user')->get([
+            'country_id','country_name','country_name_native','country_code',
+            'country_short_code','created_by','updated_by','enable_status as enable'
+        ]);
+
         foreach($countries as $key => $country){
             $countries[$key]['created_by'] = $country->users['name'];
+            $countries[$key]['updated_by'] = $country->updated_user['name'];
             unset($countries[$key]['users']);
+            unset($countries[$key]['updated_user']);
         }
+
         return response()->json($countries);
     }
 
@@ -90,7 +95,9 @@ class CountriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $countryData = Country::findOrFail($id);
+
+        return response()->json($countryData);
     }
 
     /**
@@ -102,7 +109,15 @@ class CountriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $data['updated_by'] = \Auth::Guard('api')->user()->id;
+
+        $updated = Country::where('country_id',$id)->update($data);
+
+        if($updated){
+            return $this->index();
+        }
+
     }
 
     /**
@@ -113,6 +128,19 @@ class CountriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $this->deleteRecords(new Country, 'country_id', $id);
+
+        return $this->index();
+
+    }
+
+    public function multipleDelete(Request $request)
+    {
+
+        $this->deleteRecords(new Country, 'country_id', $request->all());
+
+        return $this->index();
+
     }
 }

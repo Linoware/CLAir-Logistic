@@ -31,8 +31,13 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::post('customers/new', 'CustomersController@new');
 
     Route::resource('roles','RolesController');
+
     Route::resource('users','UsersController');
+    Route::post('users/multiple_delete','UsersController@multipleDelete');
+
     Route::resource('countries','CountriesController');
+    Route::post('countries/multiple_delete', 'CountriesController@multipleDelete');
+
     Route::resource('products','ProductsController');
 
 });

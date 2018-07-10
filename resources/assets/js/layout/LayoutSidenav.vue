@@ -82,15 +82,15 @@ export default {
         {
             hasSection:false,navMenuItems:[
                 {
-                    icon:'ion ion-md-download',label:'Freights',route:'/freights',childrends:[
+                    icon:'ion ion-md-download',label:'Components',route:'/components',childrends:[
                         {
-                            label:'Countries',route:'/freights/countries'
+                            label:'Countries',route:'/components/countries'
                         },
                         {
-                            label:'Provinces',route:'/freights/provinces'
+                            label:'Provinces',route:'/components/provinces'
                         },
                         {
-                            label:'Cities',route:'/freights/cities'
+                            label:'Cities',route:'/components/cities'
                         }
                     ]
                 }

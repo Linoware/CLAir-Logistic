@@ -10,7 +10,7 @@ import dashboardsRoutes from './dashboards'
 import layoutsRoutes from './layouts'
 import tables from './tables'
 import userRoutes from './users'
-import countryroutes from './country'
+import components from './components'
 import { routerHistory, writeHistory } from 'vue-router-back-button'
 
 Vue.use(Router)
@@ -41,7 +41,7 @@ const ROUTES = [
   .concat(layoutsRoutes)
   .concat(tables)
   .concat(userRoutes)
-  .concat(countryroutes)
+  .concat(components)
   .concat(pagenotfound)
 
 const router = new Router({

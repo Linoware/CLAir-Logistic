@@ -11,6 +11,7 @@ import layoutsRoutes from './layouts'
 import tables from './tables'
 import userRoutes from './users'
 import components from './components'
+import unsupportedinfo from './showunsupportedinfo'
 import { routerHistory, writeHistory } from 'vue-router-back-button'
 
 Vue.use(Router)
@@ -42,6 +43,7 @@ const ROUTES = [
   .concat(tables)
   .concat(userRoutes)
   .concat(components)
+  .concat(unsupportedinfo)
   .concat(pagenotfound)
 
 const router = new Router({

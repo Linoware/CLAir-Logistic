@@ -14,6 +14,8 @@
                 v-on:change="removeLoading"
                 v-show="!loading"
                 v-bind:fields="tableFields"
+                v-bind:form-data="tableFields.action.formData"
+                v-bind:form-controls="tableFields.action.formControls"
         />
 
     </div>
@@ -39,7 +41,8 @@
             return{
                 tableFields:{
                     select_all:{
-                        label:''
+                        label: "",
+                        class: "select-all-col"
                     },
                     country_name:{
                         label: "Country Name",
@@ -55,21 +58,43 @@
                     },
                     created_by:{
                         label: "Created By",
-                        sortable: true
+                        sortable: true,
                     },
                     updated_by:{
                         label: "Updated By",
                         sortable: true
                     },
                     enable_status:{
-                        label: "Eanable"
+                        label: "Eanable",
+                        class: "text-center"
                     },
                     action:{
                         name:'country_name',
                         label: "",
                         id: "country_id",
-                        status: "enable_status"
-                    }
+                        status: "enable_status",
+                        class: "action-col text-center",
+                        has_child: true,
+                        child_fields: {
+                            province_name: {
+                                label: "Province Name",
+                                class: "text-center"
+                            },
+                            province_code: {
+                                label: "Province Code",
+                                class: "text-center"
+                            },
+                            province_short_code: {
+                                label: "Province Short Code",
+                                class: "text-center"
+                            }
+                        },
+                        child_items:{
+                            province_name: '', province_code: '', province_short_code: ''
+                        },
+                        formControls: [],
+                        formData: {}
+                    },
                 },
                 loading: true,
                 api: '/api/countries',

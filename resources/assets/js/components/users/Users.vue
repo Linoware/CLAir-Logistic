@@ -39,7 +39,8 @@
             return{
                 tableFields:{
                     select_all:{
-                        label:''
+                        label: "",
+                        class: "select-all-col"
                     },
                     name:{
                         label: "Username",
@@ -54,9 +55,10 @@
                         sortable: true
                     },
                     action:{
-                        name:'name',
+                        name:"name",
                         label: "",
-                        id: "id"
+                        id: "id",
+                        class: "action-col text-center",
                     }
                 },
                 loading: true,

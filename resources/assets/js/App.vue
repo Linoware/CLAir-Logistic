@@ -34,8 +34,6 @@ export default {
   created(){
       if( isMobile.any() ) {
           this.$router.push('/unsupport_device')
-      }else{
-          this.$router.push('/')
       }
   },
   updated () {

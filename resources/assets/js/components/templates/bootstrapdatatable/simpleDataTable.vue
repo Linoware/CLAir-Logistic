@@ -8,82 +8,89 @@
              v-bind:route-url="routeUrl"
         />
 
-        <div class="row" style="width:auto !important;" v-show="!loading">
 
-            <div class="col-sm-3">
-                <b-form-group>
-                    <b-input size="sm"  placeholder="Search..." class="d-inline-block w-auto float-sm-left" @input="filter($event)" />
-                </b-form-group>
+        <b-card class="d-flex justify-content-center align-items-center">
+            <b-card-header>
+                <div class="row" style="width:auto !important;" v-show="!loading">
 
-            </div>
+                    <div class="col-sm-3">
+                        <b-form-group>
+                            <b-input size="sm"  placeholder="Search..." class="d-inline-block w-auto float-sm-left" @input="filter($event)" />
+                        </b-form-group>
 
-        </div>
+                    </div>
 
-        <!-- Table -->
-        <div class="table-responsive">
+                </div>
+            </b-card-header>
+            <b-card-body>
+                <!-- Table -->
+                <div class="table-responsive">
 
-            <b-table style="width: auto !important;" ref="table" id="my-table"
-                    :select-all="true"
-                    :items="jsonData"
-                    :fields="fields"
-                    :striped="isStriped"
-                    :hover="isHoverable"
-                    :bordered="isBordered"
-                    :small="isSmall"
-                    :fixed="isFixed"
-                    :dark="isDark"
-                    :foot-clone="isFootClone"
-                    :head-variant="headerStyle"
-                    :current-page="currentPage"
-                    :per-page="perPage">
-                <template slot="HEAD_select_all" slot-scope="data" ><div class="btn-group btn-group-sm"><b-btn class="btn-group-sm" @click.stop="selectAllRecord">{{ btnText }}</b-btn></div></template>
-                <template slot="select_all" slot-scope="data">
-                    <b-check v-model="selected" :value="data.item"></b-check>
-                </template>
-                <template :slot="fields.action.status" slot-scope="data">
-                    <label class="switcher switcher-success">
-                        <input type="checkbox" class="switcher-input" v-model="data.item.enable" @change="updateStatus(data.item[fields.action.id],data.item.enable)">
-                        <span class="switcher-indicator">
+                    <b-table style="width: auto !important;" ref="table" id="my-table"
+                             :select-all="true"
+                             :items="jsonData"
+                             :fields="fields"
+                             :striped="isStriped"
+                             :hover="isHoverable"
+                             :bordered="isBordered"
+                             :small="isSmall"
+                             :fixed="isFixed"
+                             :dark="isDark"
+                             :foot-clone="isFootClone"
+                             :head-variant="headerStyle"
+                             :current-page="currentPage"
+                             :per-page="perPage">
+                        <template slot="HEAD_select_all" slot-scope="data" ><div class="btn-group btn-group-sm"><b-btn class="btn-group-sm" @click.stop="selectAllRecord">{{ btnText }}</b-btn></div></template>
+                        <template slot="select_all" slot-scope="data">
+                            <b-check v-model="selected" :value="data.item"></b-check>
+                        </template>
+                        <template :slot="fields.action.status" slot-scope="data">
+                            <label class="switcher switcher-success">
+                                <input type="checkbox" class="switcher-input" v-model="data.item.enable" @change="updateStatus(data.item[fields.action.id],data.item.enable)">
+                                <span class="switcher-indicator">
                           <span class="switcher-yes"><span class="ion ion-md-checkmark"></span></span>
                           <span class="switcher-no"><span class="ion ion-md-close"></span></span>
                         </span>
-                    </label>
-                </template>
-                <template :slot="fields.action.name" slot-scope="data">
-                    <router-link to="record/view">{{ data.item[fields.action.name] }}</router-link>
-                </template>
-                <template slot="action" slot-scope="data">
+                            </label>
+                        </template>
+                        <template :slot="fields.action.name" slot-scope="data">
+                            <router-link :to="viewUrl + '/' + data.item[fields.action.id]">{{ data.item[fields.action.name] }}</router-link>
+                        </template>
+                        <template slot="action" slot-scope="data">
 
-                    <b-btn-group class="mr-2">
-                        <b-btn title="View Rcord" @click.stop="viewRecord(data.item[fields.action.id])"><i class = "ion ion-md-eye"></i></b-btn>
-                        <b-btn title="Delete Record" @click.stop="showConfirmDialog(data.item[fields.action.id])"><i class="ion ion-ios-trash"></i> </b-btn>
-                    </b-btn-group>
+                            <b-btn-group class="mr-2">
+                                <b-btn title="View Rcord" @click.stop="viewRecord(data.item[fields.action.id])"><i class = "ion ion-md-eye"></i></b-btn>
+                                <b-btn title="Delete Record" @click.stop="showConfirmDialog(data.item[fields.action.id])"><i class="ion ion-ios-trash"></i> </b-btn>
+                            </b-btn-group>
 
-                </template>
-            </b-table>
-        </div>
+                        </template>
+                    </b-table>
+                </div>
 
-        <!-- Pagination -->
-        <div class="row">
-            <div class="col-sm-2">
-                <b-form-group>
-                    Per page: &nbsp;
-                    <b-select size="sm" :options="perPageOptions" v-model="perPage" class="d-inline-block w-auto" />
-                </b-form-group>
-            </div>
-            <!--<div class="col-sm-2 text-sm-left text-center mb-3 mb-sm-0">-->
+                <!-- Pagination -->
+                <div class="row">
+                    <div class="col-sm-3 text-left">
+                        <b-form-group horizontal>
+                            Per page: &nbsp;
+                            <b-select size="sm" :options="perPageOptions" v-model="perPage" class="d-inline-block w-auto" />
+                        </b-form-group>
+                    </div>
+                    <!--<div class="col-sm-2 text-sm-left text-center mb-3 mb-sm-0">-->
 
-                <!--<span class="text-muted" v-if="totalPages">Page {{ currentPage }} of {{ totalPages }}</span>-->
-            <!--</div>-->
-            <div class="col-s-8">
-                <b-pagination class="justify-content-center justify-content-sm-end"
-                              v-if="totalItems"
-                              v-model="currentPage"
-                              :total-rows="totalItems"
-                              :per-page="perPage"
-                              size="sm" />
-            </div>
-        </div>
+                    <!--<span class="text-muted" v-if="totalPages">Page {{ currentPage }} of {{ totalPages }}</span>-->
+                    <!--</div>-->
+                    <div class="col-sm-8 text-left">
+                        <b-pagination class="justify-content-center justify-content-sm-end"
+                                      v-if="totalItems"
+                                      v-model="currentPage"
+                                      :total-rows="totalItems"
+                                      :per-page="perPage"
+                                      size="sm" />
+                    </div>
+                </div>
+            </b-card-body>
+        </b-card>
+
 
         <div class="d-inline-block">
             <sweet-modal ref="confirmDialog">

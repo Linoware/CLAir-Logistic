@@ -27,7 +27,7 @@
                 <b-card-body>
                     <b-form @submit.prevent="saveOrUpdateRecord">
                         <b-form-row>
-                            <b-form-group horizontal :label="formControl.type == 'checkbox' ? '' : formControl.require ? formControl.label+'*' : formControl.label" v-for="(formControl,f) in formControls" :key="f" :class="formControl.type == 'checkbox' ? formControl.class + ' text-left' : formControl.class + ' text-right'">
+                            <b-form-group  :label="formControl.type == 'checkbox' ? '' : formControl.require ? formControl.label+'*' : formControl.label" v-for="(formControl,f) in formControls" :key="f" :class="formControl.type == 'checkbox' ? formControl.class + ' text-left' : formControl.class + ' text-left'">
 
                                 <b-input
                                         v-if = "formControl.name == 'password'"

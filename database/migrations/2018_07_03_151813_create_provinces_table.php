@@ -29,7 +29,7 @@ class CreateProvincesTable extends Migration
           $table->integer('updated_by');
           $table->datetime('updated_at');
 
-          $table->foreign('country_id')->references('country_id')->on('countries');
+//          $table->foreign('country_id')->references('country_id')->on('countries');
 
         });
     }

@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CurrenciesTableSeeder::class);
 
-        $this->call(CountriesTableSeeder::class);
-        $this->call(ProvincesTableSeeder::class);
-        $this->call(CitiesTableSeeder::class);
+
+
+
 
 
         $this->call(CityZoneTableSeeder::class);
@@ -33,6 +33,10 @@ class DatabaseSeeder extends Seeder
         $this->call(FreightOriginProvincesTableSeeder::class);
         $this->call(FreightDestinationProvincesTableSeeder::class);
         $this->call(FreightChargesTableSeeder::class);
+
+        $this->call(CitiesTableSeeder::class);
+        $this->call(ProvincesTableSeeder::class);
+        $this->call(CountriesTableSeeder::class);
 
 
 

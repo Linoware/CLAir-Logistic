@@ -56,14 +56,14 @@
                         label: "Native Name",
                         sortable: true
                     },
-                    created_by:{
-                        label: "Created By",
-                        sortable: true,
-                    },
-                    updated_by:{
-                        label: "Updated By",
-                        sortable: true
-                    },
+                    // created_by:{
+                    //     label: "Created By",
+                    //     sortable: true,
+                    // },
+                    // updated_by:{
+                    //     label: "Updated By",
+                    //     sortable: true
+                    // },
                     enable_status:{
                         label: "Eanable",
                         class: "text-center"

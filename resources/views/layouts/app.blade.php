@@ -53,6 +53,7 @@
   </script> -->
 <!-- Splash screen -->
     <style>
+
       .app-splash-screen { background: #fff; position: fixed; display: block; z-index: 99999999; top: 0; right: 0; bottom: 0; left: 0; opacity: 1; transition: opacity .3s; }
       .app-splash-screen-content { position: absolute; top: 50%; left: 50%; -webkit-animation: appSplashScreenAnimation 1.2s ease-in-out 0s infinite; animation: appSplashScreenAnimation 1.2s ease-in-out 0s infinite; }
       @-webkit-keyframes appSplashScreenAnimation {

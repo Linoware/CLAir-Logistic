@@ -25,11 +25,11 @@
             return {
                 api: '/api/countries',
                 formControls: [
-                    { label: "Country Name", class: 'col-xs-12 col-sm-5 col-md-5', name: 'country_name',type: 'text', require: true },
-                    { label: "Country Name Native", class: 'col-xs-12 col-sm-5 col-md-5', name: 'country_name_native',type: 'text', require: false },
-                    { label: "Country Code", class: 'col-xs-12 col-sm-5 col-md-5', name: 'country_code',type: 'text', require: true },
-                    { label: "Country Short Code", class: 'col-xs-12 col-sm-6 col-md-5', name: 'country_short_code',type: 'text', require: true },
-                    { label: "Enable", class: 'col-xs-12 col-sm-6 col-md-5', name: 'enable_status',type: 'checkbox',items: 'status_option', require: true },
+                    { label: "Country Name", class: 'col-xs-12 col-sm-6 col-md-6', name: 'country_name',type: 'text', require: true },
+                    { label: "Country Name Native", class: 'col-xs-12 col-sm-6 col-md-6', name: 'country_name_native',type: 'text', require: false },
+                    { label: "Country Code", class: 'col-xs-12 col-sm-6 col-md-6', name: 'country_code',type: 'text', require: true },
+                    { label: "Country Short Code", class: 'col-xs-12 col-sm-6 col-md-6', name: 'country_short_code',type: 'text', require: true },
+                    { label: "Enable", class: 'col-xs-12 col-sm-6 col-md-6', name: 'enable_status',type: 'checkbox',items: 'status_option', require: true },
                 ],
                 formData: {
                     enable_status: true

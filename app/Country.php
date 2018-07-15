@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Province;
+use App\City;
 
 class Country extends Model
 {
@@ -23,4 +25,11 @@ class Country extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function children()
+    {
+        return $this->hasMany(Province::class,'country_id');
+
+    }
+
 }

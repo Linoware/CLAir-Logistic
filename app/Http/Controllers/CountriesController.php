@@ -7,6 +7,8 @@ use App\Modules\RecordHelper;
 use App\Modules\JSONResponseFormater;
 use Illuminate\Validation\Validator;
 use App\Country;
+use App\Province;
+use App\City;
 use App\User;
 
 class CountriesController extends Controller
@@ -21,17 +23,69 @@ class CountriesController extends Controller
      */
     public function index()
     {
-        $countries = Country::with('users')->with('updated_user')->get([
-            'country_id','country_name','country_name_native','country_code',
-            'country_short_code','created_by','updated_by','enable_status as enable'
-        ]);
+        $countries = Country::with('children')->get();
 
-        foreach($countries as $key => $country){
-            $countries[$key]['created_by'] = $country->users['name'];
-            $countries[$key]['updated_by'] = $country->updated_user['name'];
-            unset($countries[$key]['users']);
-            unset($countries[$key]['updated_user']);
+        foreach($countries as $key=>$country){
+            $country['fields'] = array(
+                'country_name' => array('label' => 'Country Name'),
+                'country_code' => array('label' => 'Country Code'),
+                'country_short_code' => array('label' => 'Country Short Code'),
+                'action' => array(
+                    'label' => '',
+                    'class' => 'action-col text-center',
+                    'name' => 'country_name',
+                    'id' => 'country_id',
+                    'status' => 'enable_status',
+                    'label' => '',
+                    'class' => 'action-col text-center',
+                    'api' => 'api/countries'
+                )
+
+            );
+            $provinces = Province::with('children')->where('country_id',$country['country_id'])->get();
+
+            foreach($country['children'] as $v){
+                $v['fields'] = array(
+                    'province_name' => array('label' => 'Province Name'),
+                    'province_code' => array('label' => 'Province Code'),
+                    'province_short_code' => array('label' => 'Province Short Code'),
+                    'action' => array('label' => '',
+                        'class' => 'action-col text-center',
+                        'name' => 'province_name',
+                        'id' => 'province_id',
+                        'label' => '',
+                        'class' => 'action-col text-center',
+                        'api' => 'api/provinces'
+                    )
+                );
+
+                foreach($provinces as $province){
+                    $cities = City::where('province_id',$v['province_id'])->get();
+                    $v['children'] = $cities;
+
+                    foreach($v['children'] as $c){
+                        $c['fields'] = array(
+                            'city_name' => array('label' => 'City Name'),
+                            'city_code' => array('label' => 'City Code'),
+                            'city_short_code' => array('label' => 'City Short Code'),
+                            'action' => array('label' => '',
+                                'class' => 'action-col text-center',
+                                'name' => 'city_name',
+                                'id' => 'city_id',
+                                'label' => '',
+                                'class' => 'action-col text-center',
+                                'api' => 'api/cities'
+                            )
+                        );
+                    }
+                }
+            }
+
+
+
         }
+
+//        $countries['provinces']=Province::all();
 
         return response()->json($countries);
     }

@@ -96,6 +96,20 @@ export default {
                 }
             ]
         },
+        {
+            hasSection:false,navMenuItems:[
+                {
+                    icon:'ion ion-md-settings',label:'Setting',route:'/setting',childrends:[
+                        {
+                            label:'Roles',route:'/settings/roles/list'
+                        },
+                        {
+                            label:'Permission',route:'/settings/permissions/list'
+                        }
+                    ]
+                }
+            ]
+        },
       ],
 
     }

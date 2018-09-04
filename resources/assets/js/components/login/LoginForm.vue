@@ -119,6 +119,7 @@
                     .then((res) => {
 					this.showToast('error-notifications','bg-success text-white','Login Successfull');
                         this.$store.commit("loginSuccess", res);
+
                         this.$router.push('/');
                     })
                     .catch((error) => {

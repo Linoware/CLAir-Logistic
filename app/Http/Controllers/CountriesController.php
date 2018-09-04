@@ -27,6 +27,7 @@ class CountriesController extends Controller
 
         foreach($countries as $key=>$country){
             $country['fields'] = array(
+                'select_all' => array('label'=> "", 'class'=> "select-all-col"),
                 'country_name' => array('label' => 'Country Name'),
                 'country_code' => array('label' => 'Country Code'),
                 'country_short_code' => array('label' => 'Country Short Code'),
@@ -38,11 +39,13 @@ class CountriesController extends Controller
                     'status' => 'enable_status',
                     'label' => '',
                     'class' => 'action-col text-center',
-                    'api' => 'api/countries'
+                    'children' => true,
+                    'api' => '/api/provinces',
+                    'formControls' => array('province_name', 'province_code', 'province_short_code')
                 )
 
             );
-            $provinces = Province::with('children')->where('country_id',$country['country_id'])->get();
+            $provinces = Province::get();
 
             foreach($country['children'] as $v){
                 $v['fields'] = array(
@@ -55,12 +58,14 @@ class CountriesController extends Controller
                         'id' => 'province_id',
                         'label' => '',
                         'class' => 'action-col text-center',
-                        'api' => 'api/provinces'
+                        'api' => '/api/cities',
+                        'formControls' => array('city_name', 'city_code', 'city_short_code')
                     )
                 );
 
                 foreach($provinces as $province){
                     $cities = City::where('province_id',$v['province_id'])->get();
+
                     $v['children'] = $cities;
 
                     foreach($v['children'] as $c){
@@ -74,19 +79,19 @@ class CountriesController extends Controller
                                 'id' => 'city_id',
                                 'label' => '',
                                 'class' => 'action-col text-center',
-                                'api' => 'api/cities'
+                                'api' => '/api/cities',
+                                'formControls' => array('city_name', 'city_code', 'city_short_code')
                             )
                         );
                     }
+
                 }
             }
-
-
 
         }
 
 //        $countries['provinces']=Province::all();
-
+//        dd($countries);
         return response()->json($countries);
     }
 
@@ -182,6 +187,10 @@ class CountriesController extends Controller
      */
     public function destroy($id)
     {
+
+        $province = new ProvincesController();
+
+        $province->destroy($id);
 
         $this->deleteRecords(new Country, 'country_id', $id);
 

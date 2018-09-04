@@ -19,6 +19,15 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all(['id','name','email','created_at','updated_at']);
+
+        $fields = [
+            'name' => array('label' => 'Name'),
+            'email' => array('label' => 'Email'),
+            'created_at' => array('label' => 'Created At')
+        ];
+
+        $this->responseJsonDataTable($users, $fields,false, 'name', 'id');
+
         return response()->json($users);
     }
 

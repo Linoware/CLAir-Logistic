@@ -68,6 +68,7 @@
                                         :name = "formControl.label"
                                         v-model = "formData[formControl.name]"
                                         :disabled = "recordId > 0 && !unlock"
+                                        :checked = "formData[formControl.name] == 1 ? true : false"
                                 >
                                     {{ formControl.label }}
                                 </b-check>

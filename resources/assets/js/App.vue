@@ -31,6 +31,9 @@ export default {
     title: 'Index',
     titleTemplate: '%s - Vue Starter'
   },
+  beforeRouteEnter(){
+    // console.log('before')
+  },
   created(){
       if( isMobile.any() ) {
           this.$router.push('/unsupport_device')

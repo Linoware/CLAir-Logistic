@@ -10,6 +10,7 @@ import dashboardsRoutes from './dashboards'
 import layoutsRoutes from './layouts'
 import tables from './tables'
 import userRoutes from './users'
+import roles from './roles'
 import components from './components'
 import unsupportedinfo from './showunsupportedinfo'
 import { routerHistory, writeHistory } from 'vue-router-back-button'
@@ -21,7 +22,7 @@ Vue.use(routerHistory)
 let token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-    
+
     console.log(token)
     
 } else {
@@ -43,6 +44,7 @@ const ROUTES = [
   .concat(tables)
   .concat(userRoutes)
   .concat(components)
+  .concat(roles)
   .concat(unsupportedinfo)
   .concat(pagenotfound)
 

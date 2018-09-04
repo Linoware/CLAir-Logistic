@@ -5,9 +5,10 @@
              v-bind:enable-add-new-button="true"
              v-bind:enable-trash-button="selected.length > 0 ? true : false"
              v-bind:delete-multiple-records="deleteMultipleRecords"
+             v-bind:select-all="selectAllRecord"
+             v-bind:select-all-text="selectAllText"
              v-bind:route-url="routeUrl"
         />
-
 
         <b-card class="d-flex justify-content-center align-items-center">
             <b-card-header>
@@ -24,11 +25,11 @@
             </b-card-header>
             <b-card-body>
                 <!-- Table -->
-                <div class="table-responsive" style="height: 420px; overflow: scroll;">
-                    <b-table ref="table" class="table-responsive-md"
+                <div class="table-responsive" style="height: 520px; overflow: scroll;">
+                    <b-table v-for="(json, j) in jsonData" :key="j" v-if="j==0" ref="table" class="table-responsive-md"
                              :select-all="true"
                              :items="jsonData"
-                             :fields="jsonData[0]['fields']"
+                             :fields="json.fields"
                              :striped="isStriped"
                              :hover="isHoverable"
                              :bordered="isBordered"
@@ -38,13 +39,12 @@
                              :foot-clone="isFootClone"
                              :head-variant="headerStyle"
                              :current-page="currentPage"
-                             :per-page="perPage"
-                             @head-clicked="selectAllRecord">
-                        <template slot="HEAD_select_all" slot-scope="data">
-                            <div class="btn-group btn-group-sm">
-                                <b-check class="btn-group-sm" v-model="selectAll" @click.stop="selectAllRecord"></b-check>
-                            </div>
-                        </template>
+                             :per-page="perPage">
+                        <!--<template slot="HEAD_select_all" slot-scope="data">-->
+                            <!--<div class="btn-group btn-group-sm">-->
+                                <!--<b-check class="btn-group-sm" v-model="selectAll" @click.stop="selectAllRecord"></b-check>-->
+                            <!--</div>-->
+                        <!--</template>-->
                         <template slot="select_all" slot-scope="data">
                             <b-check v-model="selected" :value="data.item"></b-check>
                         </template>
@@ -63,106 +63,36 @@
                         <template :slot="jsonData.country_name" slot-scope="data">
                             <router-link :to="viewUrl + '/' + data.item.action.id">{{ data.item.action.name }}</router-link>
                         </template>
-                        <template slot="action" slot-scope="row">
 
+                        <template slot="action" slot-scope="row">
                             <b-btn-group class="btn-group-sm" style="margin-top: -18px !important;">
-                                <b-btn title="View Rcord" @click.stop="viewRecord(row.item[fields.action.id])" size="sm" class="mt-3"><i class = "ion ion-md-eye"></i></b-btn>
-                                <b-btn title="Delete Record" @click.stop="showConfirmDialog(row.item[fields.action.id])" size="sm" class="mt-3"><i class="ion ion-ios-trash"></i> </b-btn>
-                                <b-btn size="sm" @click.stop="row.toggleDetails" class="mt-3">
+                                <b-btn title="View Rcord" @click.stop="viewRecord(row.item[json.fields.action.id])" size="sm" class="mt-3"><i class = "ion ion-md-eye"></i></b-btn>
+                                <b-btn title="Delete Record" @click.stop="showConfirmDialog(row.item[json.fields.action.id])" size="sm" class="mt-3"><i class="ion ion-ios-trash"></i> </b-btn>
+                                <b-btn size="sm" @click.stop="row.toggleDetails" class="mt-3" v-if="row.item.fields.action.children">
                                     <i :class="row.detailsShowing ? 'fas fa-minus' : 'fas fa-plus'"></i>
                                 </b-btn>
                             </b-btn-group>
                         </template>
                         <template slot = "row-details" slot-scope = "row">
-                            <b-table  v-for="(child, c) in row.item.children" v-if="c==0" :key="c"
-                                :items = "row.item.children"
-                                :fields = "row.item.children[0]['fields']"
-                                :striped="isStriped"
-                                :hover="isHoverable"
-                                :bordered="isBordered"
-                                :small="isSmall"
-                                :fixed="isFixed"
-                                :dark="isDark"
-                                :foot-clone="isFootClone"
-                                :head-variant="headerStyle"
-                            >
-                                <template slot="action" slot-scope="row">
-                                    <b-btn-group class="btn-group-sm" style="margin-top: -18px !important;">
-                                        <b-btn title="View Rcord" @click.stop="viewRecord(row.item[fields.action.id])" size="sm" class="mt-3"><i class = "ion ion-md-eye"></i></b-btn>
-                                        <b-btn title="Delete Record" @click.stop="showConfirmDialog(row.item[fields.action.id])" size="sm" class="mt-3"><i class="ion ion-ios-trash"></i> </b-btn>
-                                        <b-btn size="sm" @click.stop="row.toggleDetails" class="mt-3">
-                                            <i :class="row.detailsShowing ? 'fas fa-minus' : 'fas fa-plus'"></i>
-                                        </b-btn>
-                                    </b-btn-group>
-                                </template>
+
+                            <child-table v-bind:children="row.item.children" v-bind:pid="row.item[json.fields.action.id]" v-bind:form-controls="json.fields.action.formControls" v-bind:api="json.fields.action.api">
+
                                 <template slot = "row-details" slot-scope = "row">
 
-                                    <b-table v-for="(child, c) in row.item.children" v-if="c==0" :key="c"
-                                            :items = "row.item.children"
-                                            :fields = "row.item.children[0]['fields']"
-                                            :striped="isStriped"
-                                            :hover="isHoverable"
-                                            :bordered="isBordered"
-                                            :small="isSmall"
-                                            :fixed="isFixed"
-                                            :dark="isDark"
-                                            :foot-clone="isFootClone"
-                                            :head-variant="headerStyle"
-                                    >
-                                        <template slot="action" slot-scope="row">
-                                            <b-btn-group class="btn-group-sm" style="margin-top: -18px !important;">
-                                                <b-btn title="View Rcord" @click.stop="viewRecord(row.item[fields.action.id])" size="sm" class="mt-3"><i class = "ion ion-md-eye"></i></b-btn>
-                                                <b-btn title="Delete Record" @click.stop="showConfirmDialog(row.item[fields.action.id])" size="sm" class="mt-3"><i class="ion ion-ios-trash"></i> </b-btn>
-                                            </b-btn-group>
-                                        </template>
-                                    </b-table>
-                                </template>
-                            </b-table>
-                            <!--<div  class = "table-responsive">-->
-                                <!--<table class = "table b-table table-striped table-bordered" width="100%">-->
-                                    <!--<div v-for = "(items, index) in formControls" :key = "index"  class = "table b-table table-striped table-bordered" width="100%">-->
-                                        <!--<thead v-if = "index == 0">-->
-                                            <!--<th class = "text-center" v-for = "(fields, i) in items.fields" v-if="i !== 'has_child'">{{ i }}</th><th width="50px"></th><th v-if="items.fields.has_child"></th>-->
-                                        <!--</thead>-->
-                                    <!--<tbody style = "width:100%">-->
-                                        <!--<tr>-->
-                                            <!--<td v-if="items.id == row.item[fields.action.id] && i !=='has_child'" v-for = "(control, i) in items.fields" :key = "i" @change = "col++">-->
-                                                <!--<b-input v-model="formControls[index][i]" :placeholder="i.replace('_', ' ').toUpperCase()"></b-input>-->
-                                            <!--</td>-->
+                                    <child-table v-bind:children="row.item.children" v-bind:json-data="jsonData"></child-table>
 
-                                            <!--<td style=" width: 30px">-->
-                                                <!--<b-btn class="bg-danger" size="sm" @click.stop = "formControls.splice(index,1)"><i class="fas fa-minus"></i> </b-btn>-->
-                                            <!--</td>-->
-                                            <!--<td v-if="items.fields.has_child">-->
-                                                <!--<b-btn size="sm" @click.stop = "addRow(1, items.fields.formControls, items.fields.child_items)"><i class="fas fa-plus"></i> </b-btn>-->
-                                            <!--</td>-->
-                                        <!--</tr>-->
-                                        <!--<tr v-if = "items.fields.has_child">-->
-                                            <!--{{ col }}-->
-                                            <!--<td colspan = "10">-->
-                                                <!--<table>-->
-                                                    <!--<div v-for = "(city, ci) in items.fields.formControls" :key="ci">-->
-                                                        <!--<thead>-->
-                                                        <!--<th>ljlkj</th><th>kljlj;l</th><th>kljlj;l</th>-->
-                                                        <!--</thead>-->
-                                                        <!--<tbody>-->
-                                                        <!--<tr>-->
-                                                            <!--<td v-for = "(col, cl) in city.fields" :key="cl">-->
-                                                                <!--<b-input></b-input>-->
-                                                            <!--</td>-->
-                                                        <!--</tr>-->
-                                                        <!--</tbody>-->
-                                                    <!--</div>-->
-                                                <!--</table>-->
-                                            <!--</td>-->
-                                        <!--</tr>-->
-                                    <!--</tbody>-->
-                                    <!--</div>-->
-                                <!--</table>-->
-                                <!--<div class="col-sm-12">-->
-                                    <!--<b-btn class="float-sm-right" size="sm" @click = "addRow(row.item[fields.action.id], formControls, fields.action.child_items)">Add</b-btn>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                                </template>
+
+                            </child-table>
+                            <template slot="action" slot-scope="row">
+                                <b-btn-group class="btn-group-sm" style="margin-top: -18px !important;">
+                                    <b-btn title="View Rcord" @click.stop="viewRecord(row.item[fields.action.id])" size="sm" class="mt-3"><i class = "ion ion-md-eye"></i></b-btn>
+                                    <b-btn title="Delete Record" @click.stop="showConfirmDialog(row.item[fields.action.id])" size="sm" class="mt-3"><i class="ion ion-ios-trash"></i> </b-btn>
+                                    <b-btn size="sm" @click.stop="row.toggleDetails" class="mt-3">
+                                        <i :class="row.detailsShowing ? 'fas fa-minus' : 'fas fa-plus'"></i>
+                                    </b-btn>
+                                </b-btn-group>
+                            </template>
 
                         </template>
                     </b-table>
@@ -232,7 +162,6 @@
             'viewUrl',
             'multipleDeleteApi',
             'formControls',
-            'formData'
         ],
         components:{
             TablesBootstrap,
@@ -246,6 +175,8 @@
         data(){
             return{
 
+                formDatas:{},
+
                 col: 0,
 
                 isBusy: false,
@@ -256,14 +187,15 @@
                 jsonData: [],
                 originalJsonData: [],
                 selected:[],
+                selectAllText: 'Select All',
                 selectAll:false,
 
                 recordId: null,
 
                 // Pagination
                 perPageOptions: [25, 50, 100],
-                perPage: 15,
-                currentPage: 1,
+                perPage: 25,
+                currentPage: 25,
 
                 // Table options
                 headerStyleOptions: [{ text: 'Default', value: null }, { text: 'Light', value: 'light' }, { text: 'Dark', value: 'dark' }],
@@ -321,11 +253,14 @@
 
                 this.selectAll = (this.jsonData.length === a.length) ? true : false;
 
+            },
+            selectAll(){
+                this.selectAllText = this.selectAll ? 'Deselect All' : 'Select All'
             }
 
         },
         created(){
-            this.fetchUserList(this.api)
+            this.fetchData()
 
         },
         computed: {
@@ -349,8 +284,8 @@
                     return(items)
                 })
             },
-            fetchUserList(api){
-                axios.get(api).then(res=>{
+            fetchData(){
+                axios.get(this.api).then(res=>{
                     this.jsonData = res.data
                     this.originalJsonData = res.data.slice(0)
                     this.$emit('change',this.loading)

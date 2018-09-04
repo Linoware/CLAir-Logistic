@@ -14,7 +14,7 @@
                     <b-btn :disabled = "!enablePrintButton" title="Print" @click.prevent="cancel"><i class="ion ion-ios-print"></i> </b-btn>
                     <b-btn :disabled = "!enableCloseButton" title="Close" @click.prevent="cancel"><i class="ion ion-ios-backspace"></i> </b-btn>
                 </b-btn-group>
-
+                <b-btn title="Select All" @click="selectAll">{{selectAllText}}</b-btn>
             </b-btn-toolbar>
 
         </b-navbar>
@@ -55,6 +55,8 @@
             'enableCopyButton',
             'saveOrUpdateRecord',
             'deleteMultipleRecords',
+            'selectAll',
+            'selectAllText',
             'unlockRecord',
             'recordId'
 

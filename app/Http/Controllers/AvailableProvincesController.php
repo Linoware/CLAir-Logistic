@@ -86,6 +86,6 @@ class AvailableProvincesController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }

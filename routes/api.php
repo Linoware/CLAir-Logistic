@@ -35,8 +35,15 @@ Route::group(['middleware' => 'jwt.auth'], function ($router) {
     Route::resource('users','UsersController');
     Route::post('users/multiple_delete','UsersController@multipleDelete');
 
+    Route::resource('roles','RolesController');
+    Route::post('roles/multiple_delete','RolesController@multipleDelete');
+
     Route::resource('countries','CountriesController');
     Route::post('countries/multiple_delete', 'CountriesController@multipleDelete');
+
+    Route::resource('provinces','ProvincesController');
+
+    Route::resource('cities','CitiesController');
 
     Route::resource('products','ProductsController');
 

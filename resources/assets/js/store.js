@@ -8,7 +8,6 @@ export default {
         isLoggedIn: !!user,
         loading: false,
         auth_error: null,
-        customers: []
     },
     getters: {
         isLoading(state) {
@@ -23,9 +22,6 @@ export default {
         authError(state) {
             return state.auth_error;
         },
-        customers(state) {
-            return state.customers;
-        }
     },
     mutations: {
         login(state) {
@@ -49,19 +45,32 @@ export default {
             state.isLoggedIn = false;
             state.currentUser = null;
         },
-        updateCustomers(state, payload) {
-            state.customers = payload;
-        }
     },
     actions: {
         login(context) {
             context.commit("login");
         },
-        getCustomers(context) {
-            axios.get('/api/customers')
+        refreshToken(context) {
+            axios.get('/api/auth/refresh')
             .then((response) => {
-                context.commit('updateCustomers', response.data.customers);
+                context.commit('loginSuccess', response.data);
             })
+        },
+        inspectToken(){
+            const token = this.getters.currentUser.token
+            if(token){
+                const decoded = jwt_decode(token);
+                const exp = decoded.exp
+                const orig_iat = decode.orig_iat
+                if(exp - (Date.now()/1000) < 1800 && (Date.now()/1000) - orig_iat < 628200){
+                    this.dispatch('refreshToken')
+                } else if (exp -(Date.now()/1000) < 1800){
+                    // DO NOTHING, DO NOT REFRESH
+                } else {
+                    // PROMPT USER TO RE-LOGIN, THIS ELSE CLAUSE COVERS THE CONDITION WHERE A TOKEN IS EXPIRED AS WELL
+                    console.log('Login again')
+                }
+            }
         }
     }
 };

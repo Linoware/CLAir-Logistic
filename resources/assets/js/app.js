@@ -47,6 +47,7 @@ const store = new Vuex.Store(StoreData)
 
 initialize(store, router)
 
+
 const app = new Vue({
     el: '#app',
     router,
@@ -55,8 +56,17 @@ const app = new Vue({
     components: {
         App
     },
+    whatch:{
+
+    },
     created(){
     	window.beforeunload = this.handler()
+
+        if(store.getters.isLoggedIn){
+            //setAuthorization(this.store.getters.currentUser.token)
+            console.log(store)
+        }
+
     },
     methods:{
     	handler(){

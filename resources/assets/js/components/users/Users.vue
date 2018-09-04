@@ -7,13 +7,14 @@
         <vue-block-ui v-if="loading"></vue-block-ui>
 
         <data-table
-            v-bind:api="api"
-            v-bind:route-url="'/users/create'"
-            v-bind:view-url="'/users/view'"
-            v-bind:multiple-delete-api="'/api/users/multiple_delete'"
-            v-on:change="removeLoading"
-            v-show="!loading"
-            v-bind:fields="tableFields"
+                v-bind:api="api"
+                v-bind:route-url="'/settings/roles/create'"
+                v-bind:view-url="'/settings/roles/view'"
+                v-bind:multiple-delete-api="'/api/settings/roles/multiple_delete'"
+                v-on:change="removeLoading"
+                v-show="!loading"
+                v-bind:fields="tableFields"
+                v-bind:form-data="tableFields.action.formData"
         />
 
     </div>

@@ -21,5 +21,30 @@
       return response()->json($data);
 
     }
-    
+
+    public function responseJsonDataTable($datas, $fields, $children = false, $field_name = 'name', $data_id = 'id')
+    {
+
+        $data_fields['select_all'] = array('label' => "", 'class' => "select-all-col");
+        foreach($fields as $key=>$value){
+            $data_fields[$key] = $value;
+
+        }
+
+        $data_fields['action'] = array(
+            'label' => '',
+            'class' => 'action-col text-center',
+            'name' => $field_name,
+            'id' => $data_id,
+            'label' => '',
+            'class' => 'action-col text-center',
+            'children' => $children
+        );
+
+        foreach ($datas as $key => $data) {
+
+            $data['fields'] = $data_fields;
+
+        }
+    }
   }

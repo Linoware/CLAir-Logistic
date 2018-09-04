@@ -41,18 +41,17 @@ class AuthController extends Controller
             $user = User::find($user_data->id);
 
 
-            if($user->remember_token != '' || $user->remember_token !== null){
-
-                return response()->json(['error' => 'Locked'], 203);
-
-            }else{
+//            if($user->remember_token != '' || $user->remember_token !== null){
+//
+//                return response()->json(['error' => 'Locked'], 203);
+//
+//            }else{
 
 //                $user->remember_token = substr($token,0,32);
 //                $user->save();
-
                 return $this->respondWithToken($token);
 
-            }
+//            }
 
         }
 
@@ -104,7 +103,7 @@ class AuthController extends Controller
             'user' => $this->guard()->user(),
             'token_type' => 'bearer',
             'status' => '1',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL()
         ]);
     }
 

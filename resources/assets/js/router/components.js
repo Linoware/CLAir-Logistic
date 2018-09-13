@@ -1,6 +1,10 @@
 import Layout from '../layout/Layout1'
 import Countries from '../components/country/Countries'
-import Form from '../components/country/Form'
+import CountryForm from '../components/country/Form'
+import Provinces from '../components/province/Provinces'
+import ProvinceForm from '../components/province/Form'
+import Cities from '../components/city/Cities'
+import CityForm from '../components/city/Form'
 
 export default{
     path:'/components',
@@ -12,37 +16,37 @@ export default{
         },
         {
             path: 'country/create',
-            component: Form
+            component: CountryForm
         },
         {
             path: 'country/view/:id',
-            component: Form,
+            component: CountryForm,
             props: true
         },
         {
             path: 'provinces',
-            component: Countries
+            component: Provinces
         },
         {
             path: 'province/create',
-            component: Form
+            component: ProvinceForm
         },
         {
             path: 'province/view/:id',
-            component: Form,
+            component: ProvinceForm,
             props: true
         },
         {
             path: 'cities',
-            component: Countries
+            component: Cities
         },
         {
             path: 'city/create',
-            component: Form
+            component: CityForm
         },
         {
             path: 'city/view/:id',
-            component: Form,
+            component: CityForm,
             props: true
         },
     ]

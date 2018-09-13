@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width: 100% !important;">
 
         <left-align-button-group ref="childDialog"
              v-bind:enable-add-new-button="true"
@@ -10,111 +10,146 @@
              v-bind:route-url="routeUrl"
         />
 
-        <b-card class="d-flex justify-content-center align-items-center">
+        <!--<two-cube-spin v-show="loading"></two-cube-spin>-->
+        <vue-block-ui v-if="loading"></vue-block-ui>
+
+        <b-card class="d-flex justify-content-center align-items-center"  style="width: 100% !important;">
             <b-card-header>
-                <div class="row" style="width:auto !important;" v-show="!loading">
+                <div class="row" style="width: 100% !important;" v-show="!loading">
 
                     <div class="col-sm-3">
-                        <b-form-group>
-                            <b-input size="sm"  placeholder="Search..." class="d-inline-block w-auto float-sm-left" @input="filter($event)" />
+                        <b-form-group label="Search Something">
+                            <b-input  placeholder="Type Someting..." class="form-control" @input="filter($event)" />
+                        </b-form-group>
+
+                    </div>
+                    <div class="col-sm-3" v-for="(filterControl,f) in filterControls" :key="f">
+                        <b-form-group
+                                :label="filterControl.type == 'checkbox' ? '' : filterControl.require ? filterControl.label+'*' : filterControl.label"
+                                :class="filterControl.type == 'checkbox' ? filterControl.class + ' text-left' : filterControl.class + ' text-left'">
+                            <b-select
+                                v-if = "filterControl.type == 'select'" class="form-control"
+                                plain
+                                :name = "filterControl.name"
+                                v-model = "filterData[filterControl.name]"
+                                :options="dropDown[filterControl.items]"
+                            />
+                            <b-input
+                                v-else :type = "filterControl.type" class="form-control"
+                                :name = "filterControl.name"
+                                v-model = "filterData[filterControl.name]"
+                            />
                         </b-form-group>
 
                     </div>
 
                 </div>
             </b-card-header>
-            <b-card-body>
-                <!-- Table -->
-                <div class="table-responsive" style="height: 520px; overflow: scroll;">
-                    <b-table v-for="(json, j) in jsonData" :key="j" v-if="j==0" ref="table" class="table-responsive-md"
-                             :select-all="true"
-                             :items="jsonData"
-                             :fields="json.fields"
-                             :striped="isStriped"
-                             :hover="isHoverable"
-                             :bordered="isBordered"
-                             :small="isSmall"
-                             :fixed="isFixed"
-                             :dark="isDark"
-                             :foot-clone="isFootClone"
-                             :head-variant="headerStyle"
-                             :current-page="currentPage"
-                             :per-page="perPage">
-                        <!--<template slot="HEAD_select_all" slot-scope="data">-->
+            <b-card-body style="width: 100% !important;">
+                <div v-if="jsonData">
+                    <!-- Table -->
+                    <div class="table-responsive" style="height: 520px; overflow: scroll; width: 100% !important;">
+                        <b-table v-for="(json, j) in jsonData" :key="j" v-if="j==0" ref="table" class="table-responsive-md"
+                                 :select-all="true"
+                                 :items="jsonData"
+                                 :fields="json.fields"
+                                 :striped="isStriped"
+                                 :hover="isHoverable"
+                                 :bordered="isBordered"
+                                 :small="isSmall"
+                                 :fixed="isFixed"
+                                 :dark="isDark"
+                                 :foot-clone="isFootClone"
+                                 :head-variant="headerStyle"
+                                 :current-page="currentPage"
+                                 :per-page="perPage">
+                            <!--<template slot="HEAD_select_all" slot-scope="data">-->
                             <!--<div class="btn-group btn-group-sm">-->
-                                <!--<b-check class="btn-group-sm" v-model="selectAll" @click.stop="selectAllRecord"></b-check>-->
+                            <!--<b-check class="btn-group-sm" v-model="selectAll" @click.stop="selectAllRecord"></b-check>-->
                             <!--</div>-->
-                        <!--</template>-->
-                        <template slot="select_all" slot-scope="data">
-                            <b-check v-model="selected" :value="data.item"></b-check>
-                        </template>
-                        <template :slot="jsonData.enable_status" slot-scope="data" class="justify-content-center text-center">
-                            <!--<div class="justify-content-center justify-content-sm-end">-->
+                            <!--</template>-->
+                            <template slot="select_all" slot-scope="data">
+                                <b-check v-model="selected" :value="data.item"></b-check>
+                            </template>
+                            <template :slot="jsonData.enable_status" slot-scope="data" class="justify-content-center text-center">
+                                <!--<div class="justify-content-center justify-content-sm-end">-->
                                 <!--<label class="switcher switcher-success">-->
-                                    <!--<input type="checkbox" class="switcher-input" v-model="data.item.enable" @change="updateStatus(data.item[fields.action.id],data.item.enable)">-->
-                                    <!--<span class="switcher-indicator">-->
-                                        <!--<span class="switcher-yes"><span class="ion ion-md-checkmark"></span></span>-->
-                                        <!--<span class="switcher-no"><span class="ion ion-md-close"></span></span>-->
-                                    <!--</span>-->
+                                <!--<input type="checkbox" class="switcher-input" v-model="data.item.enable" @change="updateStatus(data.item[fields.action.id],data.item.enable)">-->
+                                <!--<span class="switcher-indicator">-->
+                                <!--<span class="switcher-yes"><span class="ion ion-md-checkmark"></span></span>-->
+                                <!--<span class="switcher-no"><span class="ion ion-md-close"></span></span>-->
+                                <!--</span>-->
                                 <!--</label>-->
-                            <!--</div>-->
-                            {{ data.item.action.status ? 'Enabled' : 'Disabled' }}
-                        </template>
-                        <template :slot="jsonData.country_name" slot-scope="data">
-                            <router-link :to="viewUrl + '/' + data.item.action.id">{{ data.item.action.name }}</router-link>
-                        </template>
+                                <!--</div>-->
+                                {{ data.item.action.status ? 'Enabled' : 'Disabled' }}
+                            </template>
+                            <template :slot="jsonData.country_name" slot-scope="data">
+                                <router-link :to="viewUrl + '/' + data.item.action.id">{{ data.item.action.name }}</router-link>
+                            </template>
 
-                        <template slot="action" slot-scope="row">
-                            <b-btn-group class="btn-group-sm" style="margin-top: -18px !important;">
-                                <b-btn title="View Rcord" @click.stop="viewRecord(row.item[json.fields.action.id])" size="sm" class="mt-3"><i class = "ion ion-md-eye"></i></b-btn>
-                                <b-btn title="Delete Record" @click.stop="showConfirmDialog(row.item[json.fields.action.id])" size="sm" class="mt-3"><i class="ion ion-ios-trash"></i> </b-btn>
-                                <b-btn size="sm" @click.stop="row.toggleDetails" class="mt-3" v-if="row.item.fields.action.children">
-                                    <i :class="row.detailsShowing ? 'fas fa-minus' : 'fas fa-plus'"></i>
-                                </b-btn>
-                            </b-btn-group>
-                        </template>
-                        <template slot = "row-details" slot-scope = "row">
-
-                            <child-table v-bind:children="row.item.children" v-bind:pid="row.item[json.fields.action.id]" v-bind:form-controls="json.fields.action.formControls" v-bind:api="json.fields.action.api">
-
-                                <template slot = "row-details" slot-scope = "row">
-
-                                    <child-table v-bind:children="row.item.children" v-bind:json-data="jsonData"></child-table>
-
-                                </template>
-
-                            </child-table>
                             <template slot="action" slot-scope="row">
                                 <b-btn-group class="btn-group-sm" style="margin-top: -18px !important;">
-                                    <b-btn title="View Rcord" @click.stop="viewRecord(row.item[fields.action.id])" size="sm" class="mt-3"><i class = "ion ion-md-eye"></i></b-btn>
-                                    <b-btn title="Delete Record" @click.stop="showConfirmDialog(row.item[fields.action.id])" size="sm" class="mt-3"><i class="ion ion-ios-trash"></i> </b-btn>
-                                    <b-btn size="sm" @click.stop="row.toggleDetails" class="mt-3">
+                                    <b-btn title="View Rcord" @click.stop="viewRecord(row.item[json.fields.action.id])" size="sm" class="mt-3"><i class = "ion ion-md-eye"></i></b-btn>
+                                    <b-btn title="Delete Record" @click.stop="showConfirmDialog(row.item[json.fields.action.id])" size="sm" class="mt-3"><i class="ion ion-ios-trash"></i> </b-btn>
+                                    <b-btn size="sm" @click.stop="row.toggleDetails" class="mt-3" v-if="row.item.fields.action.children">
                                         <i :class="row.detailsShowing ? 'fas fa-minus' : 'fas fa-plus'"></i>
                                     </b-btn>
                                 </b-btn-group>
                             </template>
+                            <template slot = "row-details" slot-scope = "row">
 
-                        </template>
-                    </b-table>
-                </div>
+                                <child-table v-bind:children="row.item.children" v-bind:pid="row.item[json.fields.action.id]" v-bind:form-controls="json.fields.action.formControls" v-bind:api="json.fields.action.api">
 
-                <!-- Pagination -->
-                <div class="row">
-                    <div class="col-sm-2">
-                        <b-form-group>
-                            <label class="float-sm-left">Per page: &nbsp;</label>
-                            <b-select size="sm" :options="perPageOptions" v-model="perPage" class="d-inline-block w-auto float-sm-left" />
-                        </b-form-group>
+                                    <template slot = "row-details" slot-scope = "row">
+
+                                        <child-table v-bind:children="row.item.children" v-bind:json-data="jsonData"></child-table>
+
+                                    </template>
+
+                                </child-table>
+                                <template slot="action" slot-scope="row">
+                                    <b-btn-group class="btn-group-sm" style="margin-top: -18px !important;">
+                                        <b-btn title="View Rcord" @click.stop="viewRecord(row.item[fields.action.id])" size="sm" class="mt-3"><i class = "ion ion-md-eye"></i></b-btn>
+                                        <b-btn title="Delete Record" @click.stop="showConfirmDialog(row.item[fields.action.id])" size="sm" class="mt-3"><i class="ion ion-ios-trash"></i> </b-btn>
+                                        <b-btn size="sm" @click.stop="row.toggleDetails" class="mt-3">
+                                            <i :class="row.detailsShowing ? 'fas fa-minus' : 'fas fa-plus'"></i>
+                                        </b-btn>
+                                    </b-btn-group>
+                                </template>
+
+                            </template>
+                        </b-table>
                     </div>
 
-                    <div class="col-sm">
-                        <b-pagination class="justify-content-center justify-content-sm-end"
-                          v-if="totalItems"
-                          v-model="currentPage"
-                          :total-rows="totalItems"
-                          :per-page="perPage"
-                          size="sm"
-                        />
+                    <!-- Pagination -->
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <b-form-group>
+                                <label class="float-sm-left">Per page: &nbsp;</label>
+                                <b-select size="sm" :options="perPageOptions" v-model="perPage" class="d-inline-block w-auto float-sm-left" />
+                            </b-form-group>
+                        </div>
+
+                        <div class="col-sm">
+                            <b-pagination class="justify-content-center justify-content-sm-end"
+                                          v-if="totalItems"
+                                          v-model="currentPage"
+                                          :total-rows="totalItems"
+                                          :per-page="perPage"
+                                          size="sm"
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="table-responsive" style="width: 100%;">
+                        <table id="__BVID__69" aria-busy="false" aria-colcount="5" aria-rowcount="-1" class="table-responsive-md table b-table table-striped table-bordered b-table-fixed" select-all="true">
+                            <tr align="center">
+                                <td>
+                                    No Result
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
 
@@ -153,15 +188,20 @@
     import defaultFrom from '../forms/defaultForm'
     import TablesBootstrap from "../../tables/Bootstrap";
     import ChildTable from './childTable'
+    import TwoCubeSpin from '../../spinkits/TwoCubeSpin'
+    import VueBlockUi from '../../spinkits/VueBlockUi'
     export default{
         props:[
             'api',
-            'loading',
             'routeUrl',
             'fields',
             'viewUrl',
             'multipleDeleteApi',
             'formControls',
+            'filterControls',
+            'filterData',
+            'dropDown',
+            'isFilter'
         ],
         components:{
             TablesBootstrap,
@@ -170,11 +210,13 @@
             SweetModal,
             SweetModalTab,
             defaultFrom,
-            ChildTable
+            ChildTable,
+            TwoCubeSpin,
+            VueBlockUi,
         },
         data(){
             return{
-
+                loading: false,
                 formDatas:{},
 
                 col: 0,
@@ -254,13 +296,27 @@
                 this.selectAll = (this.jsonData.length === a.length) ? true : false;
 
             },
+
             selectAll(){
                 this.selectAllText = this.selectAll ? 'Deselect All' : 'Select All'
+            },
+
+            filterData:{
+                handler:function(v,ov){
+                    // console.log(ov)
+                   this.filterRecord(ov)
+                },deep:true
             }
 
         },
         created(){
-            this.fetchData()
+
+            if(this.isFilter){
+                this.filterRecord()
+            }else{
+                this.fetchData()
+            }
+
 
         },
         computed: {
@@ -289,6 +345,16 @@
                     this.jsonData = res.data
                     this.originalJsonData = res.data.slice(0)
                     this.$emit('change',this.loading)
+                    console.log(res.data)
+                })
+            },
+            filterRecord(){
+                // console.log(this.filterData)
+                // this.loading = !this.loading
+                axios.post(this.api+'/filters', this.filterData).then(res=>{
+                    this.jsonData = res.data
+                    this.originalJsonData = res.data.slice(0)
+                    // this.loading = !this.loading
                     console.log(res.data)
                 })
             },
@@ -346,6 +412,10 @@
 
 <style>
     div.my-table tr{
+        width: 100% !important;
+    }
+
+    div.card-body{
         width: 100% !important;
     }
 </style>

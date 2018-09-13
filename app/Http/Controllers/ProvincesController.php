@@ -22,11 +22,135 @@ class ProvincesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $countries = new CountriesController();
 
-        return $countries->index();
+        $filter = $request->all();
+
+        dd($filter);
+
+        foreach($filter as $key=>$val){
+            if($val==='' or $val===null){
+                unset($filter[$key]);
+            }
+        }
+
+//        dd($filter);
+
+        $provinces = Province::where($filter)->get(['province_id','province_name','province_code','province_short_code','created_at','updated_at']);
+
+        foreach($provinces as $key=>$province) {
+            $province['fields'] = array(
+                'select_all' => array('label' => "", 'class' => "select-all-col"),
+                'province_name' => array('label' => 'Province Name'),
+                'province_code' => array('label' => 'Province Code'),
+                'province_short_code' => array('label' => 'Province Short Code'),
+                'action' => array('label' => '',
+                    'class' => 'action-col text-center',
+                    'name' => 'province_name',
+                    'id' => 'province_id',
+                    'label' => '',
+                    'class' => 'action-col text-center',
+                    'children' => true,
+                    'api' => '/api/cities',
+                    'formControls' => array('city_name', 'city_code', 'city_short_code')
+                )
+            );
+
+            $cities = City::where('province_id',$province['province_id'])->get();
+
+            $v['children'] = $cities;
+
+            foreach($province['children'] as $c){
+                $c['fields'] = array(
+                    'city_name' => array('label' => 'City Name'),
+                    'city_code' => array('label' => 'City Code'),
+                    'city_short_code' => array('label' => 'City Short Code'),
+                    'action' => array('label' => '',
+                        'class' => 'action-col text-center',
+                        'name' => 'city_name',
+                        'id' => 'city_id',
+                        'label' => '',
+                        'class' => 'action-col text-center',
+                        'children' => false,
+                        'api' => '/api/cities',
+                        'formControls' => array('city_name', 'city_code', 'city_short_code')
+                    )
+                );
+            }
+
+        }
+
+        return response()->json($provinces);
+    }
+
+    public function provinceFilter(Request $request)
+    {
+        $filter = $request->all();
+
+//        dd($filter);
+
+        foreach($filter as $key=>$val){
+            if($val==='' or $val===null){
+                unset($filter[$key]);
+            }
+
+        }
+
+//        dd($filter);
+
+        $provinces = Province::where($filter)->get(['province_id','province_name','province_code','province_short_code','created_at','updated_at']);
+
+        foreach($provinces as $key=>$province) {
+            $province['fields'] = array(
+                'select_all' => array('label' => "", 'class' => "select-all-col"),
+                'province_name' => array('label' => 'Province Name'),
+                'province_code' => array('label' => 'Province Code'),
+                'province_short_code' => array('label' => 'Province Short Code'),
+                'action' => array('label' => '',
+                    'class' => 'action-col text-center',
+                    'name' => 'province_name',
+                    'id' => 'province_id',
+                    'label' => '',
+                    'class' => 'action-col text-center',
+                    'children' => true,
+                    'api' => '/api/cities',
+                    'formControls' => array('city_name', 'city_code', 'city_short_code')
+                )
+            );
+
+            $cities = City::where('province_id',$province['province_id'])->get();
+
+            $v['children'] = $cities;
+
+            foreach($province['children'] as $c){
+                $c['fields'] = array(
+                    'city_name' => array('label' => 'City Name'),
+                    'city_code' => array('label' => 'City Code'),
+                    'city_short_code' => array('label' => 'City Short Code'),
+                    'action' => array('label' => '',
+                        'class' => 'action-col text-center',
+                        'name' => 'city_name',
+                        'id' => 'city_id',
+                        'label' => '',
+                        'class' => 'action-col text-center',
+                        'children' => false,
+                        'api' => '/api/cities',
+                        'formControls' => array('city_name', 'city_code', 'city_short_code')
+                    )
+                );
+            }
+
+        }
+
+        return response()->json($provinces);
+    }
+
+    public function getCountries()
+    {
+        $countries = Country::all(['country_name as text', 'country_id as value']);
+
+        return response()->json($countries);
     }
 
     /**
@@ -47,8 +171,6 @@ class ProvincesController extends Controller
      */
     public function store(Request $request)
     {
-
-
 
         $model = new Province();
         $request['country_id'] = $request->pid;
@@ -80,7 +202,7 @@ class ProvincesController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

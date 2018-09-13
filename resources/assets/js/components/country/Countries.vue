@@ -7,14 +7,14 @@
         <vue-block-ui v-if="loading"></vue-block-ui>
 
         <data-table
-                v-bind:api="api"
-                v-bind:route-url="'/components/country/create'"
-                v-bind:view-url="'/components/country/view'"
-                v-bind:multiple-delete-api="'/api/countries/multiple_delete'"
-                v-on:change="removeLoading"
-                v-show="!loading"
-                v-bind:fields="tableFields"
-                v-bind:form-data="tableFields.action.formData"
+            v-bind:api="api"
+            v-bind:route-url="'/components/country/create'"
+            v-bind:view-url="'/components/country/view'"
+            v-bind:multiple-delete-api="'/api/countries/multiple_delete'"
+            v-on:change="removeLoading"
+            v-show="!loading"
+            v-bind:fields="tableFields"
+            v-bind:is-filter="false"
         />
 
     </div>
@@ -38,31 +38,7 @@
         },
         data(){
             return{
-                tableFields:{
-                    select_all:{
-                        label: "",
-                        class: "select-all-col"
-                    },
-                    country_name:{
-                        label: "Country Name",
-                        sortable: true
-                    },
-                    country_code:{
-                        label: "Country Code",
-                        sortable: true
-                    },
-                    country_name_native:{
-                        label: "Native Name",
-                        sortable: true
-                    },
-                    enable_status:{
-                        label: "Eanable",
-                        class: "text-center"
-                    },
-                    action: {
-                        label: ""
-                    }
-                },
+                tableFields:{},
                 loading: true,
                 api: '/api/countries',
                 breadcrumb_items:[

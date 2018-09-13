@@ -32,4 +32,18 @@ trait RecordHelper{
         return true;
     }
 
+    public function recordByFilter($table, $filter=array())
+    {
+        foreach($filter as $key=>$val){
+            if($val==='' or $val===null){
+                unset($filter[$key]);
+            }
+        }
+        $Customers=DB::table($table)
+            ->select('*')
+            ->where($filter)
+            ->get();
+        return $Customers;
+    }
+
 }
